@@ -1,7 +1,5 @@
 # User Views
 
-Accessible:
-
 - System administrator
   - full access
 - Property Owner (Client)
