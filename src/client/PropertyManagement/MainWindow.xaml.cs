@@ -23,9 +23,15 @@ namespace PropertyManagement
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Snackbar Snackbar;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // get our menu items
+            DataContext = new MainWindowViewModel(MainSnackbar.MessageQueue);
+            Snackbar = MainSnackbar;
         }
 
         private async void MenuPopupButton_OnClick(object sender, RoutedEventArgs e)

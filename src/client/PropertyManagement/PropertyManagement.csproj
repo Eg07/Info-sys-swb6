@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resources\Logo.png" />
-    <None Remove="resources\property.ico" />
+    <None Remove="Resources\Logo.png" />
+    <None Remove="Resources\property.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="resources\property.ico">
+    <Content Include="Resources\property.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
