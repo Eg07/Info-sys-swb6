@@ -1,10 +1,7 @@
-﻿using System.Configuration;
+﻿using System;
 using MaterialDesignThemes.Wpf;
-using MaterialDesignThemes.Wpf.Transitions;
-using System.Windows.Controls;
-using System;
 
-namespace PropertyManagement.Domain
+namespace PropertyManagement.Domain.ViewModels
 {
     public class MainWindowViewModel
     {

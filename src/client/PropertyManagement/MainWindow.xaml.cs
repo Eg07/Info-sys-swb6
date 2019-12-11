@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using PropertyManagement.Domain;
+using PropertyManagement.Domain.ViewModels;
 
 namespace PropertyManagement
 {
@@ -42,7 +43,6 @@ namespace PropertyManagement
                 MainSnackbar.MessageQueue.Enqueue("Welcome to your personal property management!");
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            // get our menu items
             DataContext = new MainWindowViewModel(MainSnackbar.MessageQueue);
             Snackbar = MainSnackbar;
         }
