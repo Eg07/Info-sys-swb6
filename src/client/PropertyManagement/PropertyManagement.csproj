@@ -7,14 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="property.ico" />
     <None Remove="Resources\Logo.png" />
     <None Remove="Resources\property.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\property.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="Resources\property.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Domain\MessageDialog.xaml.cs">
+    <Compile Update="Domain\UiElements\MessageDialog.xaml.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
   </ItemGroup>

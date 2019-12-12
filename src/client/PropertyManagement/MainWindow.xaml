@@ -15,7 +15,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Icon="Resources/property.ico">
+        Icon="resources/property.ico">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -50,26 +50,30 @@
             <DockPanel>
                 <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
-                    <DockPanel>
-                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
-                                        x:Name="MenuToggleButton"/>
-                        <Grid DockPanel.Dock="Right">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <domain:PaletteSelector Grid.Column="0" Margin="0 0 35 0"></domain:PaletteSelector>
-                            <materialDesign:PopupBox Grid.Column="1" DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                                <StackPanel>
-                                    <Button Content="Item1" Click="MenuPopupButton_OnClick"/>
-                                    <Button Content="Can't Touch This" IsEnabled="False" />
-                                    <Separator/>
-                                    <Button Content="Exit" Click="MenuPopupButton_OnClick"/>
-                                </StackPanel>
-                            </materialDesign:PopupBox>
-                        </Grid>
+                    <!-- Top menu bar -->
+                    <Grid>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Property Management</TextBlock>
-                    </DockPanel>
+                        <DockPanel>
+                            <ToggleButton DockPanel.Dock="Left" Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                            x:Name="MenuToggleButton"/>
+                            <Grid DockPanel.Dock="Right">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <domain:PaletteSelector Grid.Column="0" Margin="0 0 35 0"></domain:PaletteSelector>
+                                <materialDesign:PopupBox Grid.Column="1" DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                                    <StackPanel>
+                                        <Button Content="Item1" Click="MenuPopupButton_OnClick"/>
+                                        <Button Content="Can't Touch This" IsEnabled="False" />
+                                        <Separator/>
+                                        <Button Content="Exit" Click="MenuPopupButton_OnClick"/>
+                                    </StackPanel>
+                                </materialDesign:PopupBox>
+                            </Grid>
+                            <Grid></Grid>
+                        </DockPanel>
+                    </Grid>
                 </materialDesign:ColorZone>
                 <Grid>
                     <Grid.RowDefinitions>

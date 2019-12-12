@@ -12,7 +12,7 @@ namespace PropertyManagement.Domain.ViewModels
             MenuItems = new[]
             {
                 new MenuItem("Home", new Home()),
-                new MenuItem("Second Item", new Home()),
+                new MenuItem("Property Data", new PropertyDetail()),
             };
         }
 
