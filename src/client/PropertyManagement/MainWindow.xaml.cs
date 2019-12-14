@@ -59,7 +59,6 @@ namespace PropertyManagement
                 dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
             }
 
-            // 
             ((MainWindowViewModel) DataContext).DisplayHome();
             MenuToggleButton.IsChecked = false;            
         }

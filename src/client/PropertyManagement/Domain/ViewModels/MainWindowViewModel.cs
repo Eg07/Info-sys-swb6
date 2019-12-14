@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace PropertyManagement.Domain.ViewModels
 {
@@ -44,16 +44,7 @@ namespace PropertyManagement.Domain.ViewModels
             };
         }
 
-        public void DisplayHome()
-        {
-            CurrentViewModel = new HomeViewModel(/*
-                new Home() { PageTitle = "This is the Home Page." }*/);
-        }
-
-        public void DisplayPropertyDetail()
-        {
-            CurrentViewModel = new PropertyDetailViewModel(/*
-                new PropertyDetail() { PageTitle = "This is the Settings Page." }*/);
-        }
+        public void DisplayHome() => CurrentViewModel = new HomeViewModel();
+        public void DisplayPropertyDetail() => CurrentViewModel = new PropertyDetailViewModel();
     }
 }

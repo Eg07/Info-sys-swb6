@@ -49,7 +49,6 @@
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="domain:MenuItem">
-                                <!-- change here -->
                                 <TextBlock Text="{Binding Name}" Margin="32 0 32 0"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -90,14 +89,10 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ScrollViewer Grid.Row="1" >
-                            <!--HorizontalScrollBarVisibility="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.HorizontalScrollBarVisibilityRequirement}"
-                                  VerticalScrollBarVisibility="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.VerticalScrollBarVisibilityRequirement}" 
-                                  Padding="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.MarginRequirement}"-->
+                    <ScrollViewer Grid.Row="1">
                         <!-- Main content area -->
                         <ContentControl Content="{Binding Path=CurrentViewModel}" />
-                        <!-- ContentControl Content="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.Content}" /-->
-                        <!-- Main content area -->
+                            <!-- Main content area -->
 
                     </ScrollViewer>
                     <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" Grid.Row="1" />
