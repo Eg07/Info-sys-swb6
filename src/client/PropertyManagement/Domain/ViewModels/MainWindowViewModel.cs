@@ -1,13 +1,41 @@
 ﻿using System;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 
 namespace PropertyManagement.Domain.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase
     {
+        // The menu items in the navigation drawer
+        public MenuItem[] MenuItems { get; }
+
+        // ViewModel that is currently bound to the ContentControl
+        private ViewModelBase _currentViewModel;
+
+        public ViewModelBase CurrentViewModel
+        {
+            get => _currentViewModel;
+            set
+            {
+                _currentViewModel = value;
+                OnPropertyChanged("CurrentViewModel");
+            }
+        }
+
+        public ICommand LoadHomeCommand { get; private set; }
+        public ICommand LoadPropertyDetailCommand { get; private set; }
+
         public MainWindowViewModel(ISnackbarMessageQueue snackbarMessageQueue)
         {
             if (snackbarMessageQueue == null) throw new ArgumentNullException(nameof(snackbarMessageQueue));
+            
+            // load home on startup
+            DisplayHome();
+
+            // Hook up Commands to associated methods
+            LoadHomeCommand = new CommandImplementation(o => DisplayHome());
+            LoadPropertyDetailCommand = new CommandImplementation(o => DisplayPropertyDetail());
 
             MenuItems = new[]
             {
@@ -16,6 +44,16 @@ namespace PropertyManagement.Domain.ViewModels
             };
         }
 
-        public MenuItem[] MenuItems { get; }
+        public void DisplayHome()
+        {
+            CurrentViewModel = new HomeViewModel(/*
+                new Home() { PageTitle = "This is the Home Page." }*/);
+        }
+
+        public void DisplayPropertyDetail()
+        {
+            CurrentViewModel = new PropertyDetailViewModel(/*
+                new PropertyDetail() { PageTitle = "This is the Settings Page." }*/);
+        }
     }
 }

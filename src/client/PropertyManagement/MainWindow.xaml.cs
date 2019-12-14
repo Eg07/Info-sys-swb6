@@ -47,6 +47,9 @@ namespace PropertyManagement
             await DialogHost.Show(sampleMessageDialog, "RootDialog");
         }
 
+        /// <summary>
+        /// Handles navigation of ListBox
+        /// </summary>
         private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var dependencyObject = Mouse.Captured as DependencyObject;
@@ -56,7 +59,9 @@ namespace PropertyManagement
                 dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
             }
 
-            MenuToggleButton.IsChecked = false;
+            // 
+            ((MainWindowViewModel) DataContext).DisplayHome();
+            MenuToggleButton.IsChecked = false;            
         }
     }
 }
