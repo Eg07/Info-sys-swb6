@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
-// ReSharper disable MemberCanBePrivate.Global
 
+// ReSharper disable MemberCanBePrivate.Global
 namespace PropertyManagement.Domain.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         // The menu items in the navigation drawer
-        public MenuItem[] MenuItems { get; }
+        public NavigationMenuItem[] MenuItems { get; }
 
         // ViewModel that is currently bound to the ContentControl
         private ViewModelBase _currentViewModel;
@@ -24,7 +24,7 @@ namespace PropertyManagement.Domain.ViewModels
         }
 
         public ICommand LoadHomeCommand { get; private set; }
-        public ICommand LoadPropertyDetailCommand { get; private set; }
+        public ICommand LoadPropertyDataCommand { get; private set; }
 
         public MainWindowViewModel(ISnackbarMessageQueue snackbarMessageQueue)
         {
@@ -35,16 +35,16 @@ namespace PropertyManagement.Domain.ViewModels
 
             // Hook up Commands to associated methods
             LoadHomeCommand = new CommandImplementation(o => DisplayHome());
-            LoadPropertyDetailCommand = new CommandImplementation(o => DisplayPropertyDetail());
+            LoadPropertyDataCommand = new CommandImplementation(o => DisplayPropertyData());
 
             MenuItems = new[]
             {
-                new MenuItem("Home", new Home()),
-                new MenuItem("Property Data", new PropertyDetail()),
+                new NavigationMenuItem("Home", new Home()),
+                new NavigationMenuItem("Property Data", new PropertyDetail()),
             };
         }
 
         public void DisplayHome() => CurrentViewModel = new HomeViewModel();
-        public void DisplayPropertyDetail() => CurrentViewModel = new PropertyDetailViewModel();
+        public void DisplayPropertyData() => CurrentViewModel = new PropertyDetailViewModel();
     }
 }

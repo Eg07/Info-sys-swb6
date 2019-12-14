@@ -1,7 +1,7 @@
-﻿using System.Configuration;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using System.Windows.Input;
 using PropertyManagement.Domain;
+using PropertyManagement.Domain.ViewModels;
 
 namespace PropertyManagement
 {
@@ -10,9 +10,11 @@ namespace PropertyManagement
     /// </summary>
     public partial class Home : UserControl
     {
+
         public Home()
         {
             InitializeComponent();
+            DataContext = new HomeViewModel();
         }
     }
 }

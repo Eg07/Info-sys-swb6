@@ -1,6 +1,9 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -48,7 +51,7 @@ namespace PropertyManagement
         }
 
         /// <summary>
-        /// Handles navigation of ListBox
+        /// Handles click on NavigationMenuItem in navigation drawer
         /// </summary>
         private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -56,11 +59,31 @@ namespace PropertyManagement
             while (dependencyObject != null)
             {
                 if (dependencyObject is ScrollBar) return;
+                PickUserControlToDisplay(((NavigationMenuItem)((ListBox)sender).SelectedItem).Content.ToString());
                 dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
             }
-
-            ((MainWindowViewModel) DataContext).DisplayHome();
+            
             MenuToggleButton.IsChecked = false;            
+        }
+
+        /// <summary>
+        /// Picks correct user control to display by user control name
+        /// </summary>
+        /// <param name="userControlName">The name of the user control</param>
+        private void PickUserControlToDisplay(string userControlName)
+        {
+            var view = (MainWindowViewModel) DataContext;
+
+            switch (userControlName.Split('.').Last())
+            {
+                case "Home":
+                    view.DisplayHome();
+                    break;
+                case "PropertyDetail":
+                    view.DisplayPropertyData();
+                    break;
+            }
+            
         }
     }
 }
