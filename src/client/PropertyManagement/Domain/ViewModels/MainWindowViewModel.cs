@@ -39,8 +39,8 @@ namespace PropertyManagement.Domain.ViewModels
 
             MenuItems = new[]
             {
-                new NavigationMenuItem("Home", new Home()),
-                new NavigationMenuItem("Property Data", new PropertyDetail()),
+                new NavigationMenuItem("Home", new UserControls.Home()),
+                new NavigationMenuItem("Property Data", new UserControls.PropertyDetail()),
             };
         }
 

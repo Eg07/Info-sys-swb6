@@ -10,6 +10,7 @@
         Title="Property Management" Height="720" Width="1180"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:userControls="clr-namespace:PropertyManagement.UserControls"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -26,10 +27,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
-                <local:Home />
+                <userControls:Home />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:PropertyDetailViewModel}">
-                <local:PropertyDetail />
+                <userControls:PropertyDetail />
             </DataTemplate>
         </ResourceDictionary>        
     </Window.Resources>

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using PropertyManagement.Domain.ViewModels;
 
-namespace PropertyManagement
+namespace PropertyManagement.UserControls
 {
     /// <summary>
     /// Interaction logic for PropertyDetail.xaml
