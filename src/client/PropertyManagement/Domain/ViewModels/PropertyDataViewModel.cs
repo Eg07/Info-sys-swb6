@@ -1,6 +1,6 @@
 ﻿namespace PropertyManagement.Domain.ViewModels
 {
-    public class PropertyDetailViewModel : ViewModelBase
+    public class PropertyDataViewModel : ViewModelBase
     {
     }
 }

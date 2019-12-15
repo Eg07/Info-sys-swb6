@@ -28,7 +28,7 @@
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
                 <userControls:Home />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:PropertyDetailViewModel}">
+            <DataTemplate DataType="{x:Type viewModels:PropertyDataViewModel}">
                 <userControls:PropertyDetail />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:TenantManagementViewModel}">

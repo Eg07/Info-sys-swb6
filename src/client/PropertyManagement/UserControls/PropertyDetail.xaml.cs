@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using PropertyManagement.Domain.ViewModels;
 
 namespace PropertyManagement.UserControls
 {
@@ -11,6 +12,7 @@ namespace PropertyManagement.UserControls
         public PropertyDetail()
         {
             InitializeComponent();
+            DataContext = new PropertyDataViewModel();
         }
     }
 }
