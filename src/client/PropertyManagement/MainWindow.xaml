@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PropertyManagement"
         xmlns:domain="clr-namespace:PropertyManagement.Domain"
         xmlns:viewModels="clr-namespace:PropertyManagement.Domain.ViewModels"
         mc:Ignorable="d"
         Title="Property Management" Height="720" Width="1180"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         xmlns:userControls="clr-namespace:PropertyManagement.UserControls"
+        xmlns:uiElements="clr-namespace:PropertyManagement.Domain.UiElements"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -31,6 +30,12 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:PropertyDetailViewModel}">
                 <userControls:PropertyDetail />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:TenantManagementViewModel}">
+                <userControls:TenantManagement />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:TransactionsViewModel}">
+                <userControls:Transactions />
             </DataTemplate>
         </ResourceDictionary>        
     </Window.Resources>
@@ -70,7 +75,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <domain:PaletteSelector Grid.Column="0" Margin="0 0 35 0"></domain:PaletteSelector>
+                                <uiElements:PaletteSelector Grid.Column="0" Margin="0 0 35 0"></uiElements:PaletteSelector>
                                 <materialDesign:PopupBox Grid.Column="1" DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                                     <StackPanel>
                                         <Button Content="Home Page" Command="{Binding Path=LoadPropertyDataCommand}" />

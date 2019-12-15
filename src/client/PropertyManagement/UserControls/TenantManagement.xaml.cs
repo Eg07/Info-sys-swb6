@@ -1,14 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace PropertyManagement.Domain.UiElements
+namespace PropertyManagement.UserControls
 {
     /// <summary>
-    /// Interaction logic for SampleMessageDialog.xaml
+    /// Interaction logic for TenantManagement.xaml
     /// </summary>
     // ReSharper disable once RedundantExtendsListEntry
-    public partial class MessageDialog : UserControl
+    public partial class TenantManagement : UserControl
     {
-        public MessageDialog()
+        public TenantManagement()
         {
             InitializeComponent();
         }

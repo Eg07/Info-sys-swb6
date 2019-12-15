@@ -13,7 +13,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Center">
-            <TextBlock>Test</TextBlock>
+            <TextBlock>PropertyDetail</TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

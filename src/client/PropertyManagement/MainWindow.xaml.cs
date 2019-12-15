@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using PropertyManagement.Domain;
+using PropertyManagement.Domain.UiElements;
 using PropertyManagement.Domain.ViewModels;
 
 namespace PropertyManagement
@@ -73,16 +74,14 @@ namespace PropertyManagement
         {
             var view = (MainWindowViewModel) DataContext;
 
-            switch (userControlName.Split('.').Last())
-            {
-                case "Home":
-                    view.DisplayHome();
-                    break;
-                case "PropertyDetail":
-                    view.DisplayPropertyData();
-                    break;
-            }
-            
+            if (userControlName.Split('.').Last() == "Home")
+                view.DisplayHome();
+            else if (userControlName.Split('.').Last() == "PropertyDetail")
+                view.DisplayPropertyData();
+            else if (userControlName.Split('.').Last() == "Transactions")
+                view.DisplayTransactions();
+            else if (userControlName.Split('.').Last() == "TenantManagement")
+                view.DisplayTenantManagement();
         }
     }
 }
