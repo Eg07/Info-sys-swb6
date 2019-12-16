@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -47,11 +46,11 @@ namespace PropertyManagement.Domain.ViewModels
             if (snackbarMessageQueue == null) throw new ArgumentNullException(nameof(snackbarMessageQueue));
             
             RegisterCommands();
-            GenerateNavigationSlider();
+            GenerateNavigationDrawer();
             DisplayHome();
         }
 
-        private void GenerateNavigationSlider()
+        private void GenerateNavigationDrawer()
         {
             _userControls.Add("Home", new Home());
             _userControls.Add("TenantManagement", new TenantManagement());
@@ -59,10 +58,9 @@ namespace PropertyManagement.Domain.ViewModels
             _userControls.Add("Transactions", new Transactions());
             MenuItems = new NavigationMenuItem[_userControls.Count];
 
+            // add the UserControls to the navigation drawer
             for (var i = 0; i < _userControls.Count; i++)
-            {
                 MenuItems[i] = new NavigationMenuItem(_userControls.Keys.ElementAt(i), _userControls.Values.ElementAt(i));
-            }
         }
 
         /// <summary>

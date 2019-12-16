@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <None Remove="property.ico" />
-    <None Remove="Resources\Logo.png" />
-    <None Remove="Resources\property.ico" />
+    <None Remove="resources\house1.jpg" />
+    <None Remove="resources\Logo.png" />
+    <None Remove="resources\property.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\property.ico">
+    <Content Include="resources\house1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\property.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
