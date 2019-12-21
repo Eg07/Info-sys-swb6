@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
+using PropertyManagement.DataContainers;
 using PropertyManagement.UserControls;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -38,7 +39,7 @@ namespace PropertyManagement.Domain.ViewModels
         public void DisplayHome() => CurrentViewModel = (HomeViewModel)_userControls.Values.OfType<Home>().First().DataContext;
 
         public void DisplayTenantManagement() => CurrentViewModel = (TenantManagementViewModel)_userControls.Values.OfType<TenantManagement>().First().DataContext;
-        public void DisplayPropertyData() => CurrentViewModel = (PropertyDataViewModel)_userControls.Values.OfType<PropertyDetail>().First().DataContext;
+        public void DisplayPropertyData() => CurrentViewModel = (PropertyDataViewModel)_userControls.Values.OfType<PropertyData>().First().DataContext;
         public void DisplayTransactions() => CurrentViewModel = (TransactionsViewModel)_userControls.Values.OfType<Transactions>().First().DataContext;
 
         public MainWindowViewModel(ISnackbarMessageQueue snackbarMessageQueue)
@@ -54,7 +55,7 @@ namespace PropertyManagement.Domain.ViewModels
         {
             _userControls.Add("Home", new Home());
             _userControls.Add("TenantManagement", new TenantManagement());
-            _userControls.Add("PropertyData", new PropertyDetail());
+            _userControls.Add("PropertyData", new PropertyData());
             _userControls.Add("Transactions", new Transactions());
             MenuItems = new NavigationMenuItem[_userControls.Count];
 

@@ -1,4 +1,4 @@
-﻿namespace PropertyManagement.Domain
+﻿namespace PropertyManagement.DataContainers
 {
     public class NavigationMenuItem
     {

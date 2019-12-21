@@ -4,12 +4,12 @@ using PropertyManagement.Domain.ViewModels;
 namespace PropertyManagement.UserControls
 {
     /// <summary>
-    /// Interaction logic for PropertyDetail.xaml
+    /// Interaction logic for PropertyData.xaml
     /// </summary>
     // ReSharper disable once RedundantExtendsListEntry
-    public partial class PropertyDetail : UserControl
+    public partial class PropertyData : UserControl
     {
-        public PropertyDetail()
+        public PropertyData()
         {
             InitializeComponent();
             DataContext = new PropertyDataViewModel();

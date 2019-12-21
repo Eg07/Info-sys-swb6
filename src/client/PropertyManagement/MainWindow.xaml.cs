@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
+using PropertyManagement.DataContainers;
 using PropertyManagement.Domain;
 using PropertyManagement.Domain.UiElements;
 using PropertyManagement.Domain.ViewModels;
@@ -76,7 +77,7 @@ namespace PropertyManagement
 
             if (userControlName.Split('.').Last() == "Home")
                 view.DisplayHome();
-            else if (userControlName.Split('.').Last() == "PropertyDetail")
+            else if (userControlName.Split('.').Last() == "PropertyData")
                 view.DisplayPropertyData();
             else if (userControlName.Split('.').Last() == "Transactions")
                 view.DisplayTransactions();

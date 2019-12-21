@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace PropertyManagement.Domain
+namespace PropertyManagement.DataContainers
 {
     public static class Link
     {

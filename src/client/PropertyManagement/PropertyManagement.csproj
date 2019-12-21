@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="resources\house1.jpg">
+    <Resource Include="resources\house1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Resource Include="resources\property.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
