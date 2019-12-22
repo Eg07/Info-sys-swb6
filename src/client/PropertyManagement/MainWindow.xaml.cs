@@ -8,7 +8,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using PropertyManagement.DataContainers;
-using PropertyManagement.Domain;
 using PropertyManagement.Domain.UiElements;
 using PropertyManagement.Domain.ViewModels;
 

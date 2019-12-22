@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
+using PropertyManagement.Database;
 using PropertyManagement.DataContainers;
 using PropertyManagement.UserControls;
 
@@ -12,14 +13,24 @@ namespace PropertyManagement.Domain.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        // The menu items in the navigation drawer
+        /// <summary>
+        /// The database context for accessing persisted data.
+        /// </summary>
+        public ApplicationDbContext DbContext;
+
+        /// <summary>
+        /// The menu items in the navigation drawer
+        /// </summary>
         public NavigationMenuItem[] MenuItems { get; set; }
 
-        private readonly SortedDictionary<string, UserControl> _userControls = new SortedDictionary<string, UserControl>();
-
-        // ViewModel that is currently bound to the ContentControl
+        /// <summary>
+        /// ViewModel that is currently bound to the ContentControl
+        /// </summary>
         private ViewModelBase _currentViewModel;
 
+        /// <summary>
+        /// ViewModel that is currently bound to the ContentControl
+        /// </summary>
         public ViewModelBase CurrentViewModel
         {
             get => _currentViewModel;
@@ -29,19 +40,28 @@ namespace PropertyManagement.Domain.ViewModels
                 OnPropertyChanged("CurrentViewModel");
             }
         }
-
+        
+        // commands for loading the different user views
         public ICommand LoadHomeCommand { get; private set; }
         public ICommand LoadPropertyDataCommand { get; private set; }
         public ICommand LoadTenantManagementCommand { get; private set; }
         public ICommand LoadTransactionsCommand { get; private set; }
-
-
+        
+        // view model change bound to methods
         public void DisplayHome() => CurrentViewModel = (HomeViewModel)_userControls.Values.OfType<Home>().First().DataContext;
-
         public void DisplayTenantManagement() => CurrentViewModel = (TenantManagementViewModel)_userControls.Values.OfType<TenantManagement>().First().DataContext;
         public void DisplayPropertyData() => CurrentViewModel = (PropertyDataViewModel)_userControls.Values.OfType<PropertyData>().First().DataContext;
         public void DisplayTransactions() => CurrentViewModel = (TransactionsViewModel)_userControls.Values.OfType<Transactions>().First().DataContext;
 
+        /// <summary>
+        /// Complete set of our user views
+        /// </summary>
+        private readonly SortedDictionary<string, UserControl> _userControls = new SortedDictionary<string, UserControl>();
+
+        /// <summary>
+        /// Default Constructor for the Main View Model
+        /// </summary>
+        /// <param name="snackbarMessageQueue"></param>
         public MainWindowViewModel(ISnackbarMessageQueue snackbarMessageQueue)
         {
             if (snackbarMessageQueue == null) throw new ArgumentNullException(nameof(snackbarMessageQueue));
@@ -49,6 +69,10 @@ namespace PropertyManagement.Domain.ViewModels
             RegisterCommands();
             GenerateNavigationDrawer();
             DisplayHome();
+
+            // try to establish connection with database
+            DbContext = new ApplicationDbContext();
+            DbContext.Database.EnsureCreated();
         }
 
         private void GenerateNavigationDrawer()
