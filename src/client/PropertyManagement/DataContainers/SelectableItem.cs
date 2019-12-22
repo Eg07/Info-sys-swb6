@@ -61,6 +61,7 @@ namespace PropertyManagement.DataContainers
             get => _numeric;
             set
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (_numeric == value) return;
                 _numeric = value;
                 OnPropertyChanged();
