@@ -7,16 +7,11 @@ namespace PropertyManagement.Domain.ViewModels
 {
     public class PropertyDataViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<SelectableItem> _items1;
-        private readonly ObservableCollection<SelectableItem> _items2;
         private ObservableCollection<SelectableItem> _items3;
         private bool? _isAllItems3Selected;
 
         public PropertyDataViewModel()
         {
-            // items 1 and 2 are ignored
-            _items1 = CreateData();
-            _items2 = CreateData();
             _items3 = CreateData();
 
             Task.Factory.StartNew(() =>
@@ -85,16 +80,5 @@ namespace PropertyManagement.Domain.ViewModels
         //{
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         //}
-
-        public IEnumerable<string> Foods
-        {
-            get
-            {
-                yield return "Burger";
-                yield return "Fries";
-                yield return "Shake";
-                yield return "Lettuce";
-            }
-        }
     }
 }

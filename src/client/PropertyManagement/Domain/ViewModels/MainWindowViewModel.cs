@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using PropertyManagement.Database;
+using PropertyManagement.Database.DataModels;
 using PropertyManagement.DataContainers;
 using PropertyManagement.UserControls;
 
@@ -16,7 +18,7 @@ namespace PropertyManagement.Domain.ViewModels
         /// <summary>
         /// The database context for accessing persisted data.
         /// </summary>
-        public ApplicationDbContext DbContext;
+        public readonly ApplicationDbContext DbContext;
 
         /// <summary>
         /// The menu items in the navigation drawer
@@ -70,9 +72,14 @@ namespace PropertyManagement.Domain.ViewModels
             GenerateNavigationDrawer();
             DisplayHome();
 
+            // TODO: move to own method
             // try to establish connection with database
             DbContext = new ApplicationDbContext();
             DbContext.Database.EnsureCreated();
+            
+            // TODO: remove later
+            //CreateSampleDataSet();
+            ExecuteSampleQuery();
         }
 
         private void GenerateNavigationDrawer()
@@ -97,6 +104,30 @@ namespace PropertyManagement.Domain.ViewModels
             LoadPropertyDataCommand = new CommandImplementation(o => DisplayPropertyData());
             LoadTenantManagementCommand = new CommandImplementation(o => DisplayTenantManagement());
             LoadTransactionsCommand = new CommandImplementation(o => DisplayTransactions());
+        }
+
+        /// <summary>
+        /// Creates some sample data for property table
+        /// </summary>
+        private void CreateSampleDataSet()
+        {
+            var house1 = new PropertyDataModel { city = "Stuttgart", house_nr = 7, state = "Baden-Wuerttemberg", street = "Königsstrasse", zip = 70104 };
+            var house2 = new PropertyDataModel { city = "Karlsruhe", house_nr = 23, state = "Baden-Wuerttemberg", street = "Kronenstrasse", zip = 73021 };
+            var house3 = new PropertyDataModel { city = "Bonn", house_nr = 68, state = "Nordrhein-Westfalen", street = "Breite Strasse", zip = 53111 };
+            var house4 = new PropertyDataModel { city = "Tollwitz", house_nr = 6, state = "Sachsen-Anhalt", street = "Gewuerzstrasse", zip = 06231 };
+            DbContext.Properties.Add(house1);
+            DbContext.Properties.Add(house2);
+            DbContext.Properties.Add(house3);
+            DbContext.Properties.Add(house4);
+            DbContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Performs a SELECT * over the Properties table
+        /// </summary>
+        private void ExecuteSampleQuery()
+        {
+            DbContext.Properties.ToList().ForEach(property => Debug.WriteLine($"id: {property.id}, street: {property.street} {property.house_nr}, zipcode: {property.zip}, city: {property.city}, state: {property.state}"));
         }
     }
 }

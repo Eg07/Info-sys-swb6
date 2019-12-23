@@ -6,6 +6,7 @@ namespace PropertyManagement.Database
     public class ApplicationDbContext : DbContext
     {
         public DbSet<UnitModel> Units { get; set; }
+        public DbSet<PropertyDataModel> Properties { get; set; }
 
         public ApplicationDbContext()
         {
