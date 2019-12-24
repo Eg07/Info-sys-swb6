@@ -69,9 +69,6 @@ namespace PropertyManagement.Domain.ViewModels
             };
         }
 
-        public ObservableCollection<SelectableItem> Items1 => _items1;
-        public ObservableCollection<SelectableItem> Items2 => _items2;
-
         public ObservableCollection<SelectableItem> Items3 => _items3;
 
         //public event PropertyChangedEventHandler PropertyChanged;

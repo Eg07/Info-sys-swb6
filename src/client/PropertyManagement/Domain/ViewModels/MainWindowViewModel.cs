@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using PropertyManagement.Database;
-using PropertyManagement.Database.DataModels;
 using PropertyManagement.DataContainers;
 using PropertyManagement.UserControls;
 
@@ -79,7 +78,7 @@ namespace PropertyManagement.Domain.ViewModels
             
             // TODO: remove later
             //CreateSampleDataSet();
-            ExecuteSampleQuery();
+            //ExecuteSampleQuery();
         }
 
         private void GenerateNavigationDrawer()
@@ -111,15 +110,15 @@ namespace PropertyManagement.Domain.ViewModels
         /// </summary>
         private void CreateSampleDataSet()
         {
-            var house1 = new PropertyDataModel { city = "Stuttgart", house_nr = 7, state = "Baden-Wuerttemberg", street = "Königsstrasse", zip = 70104 };
-            var house2 = new PropertyDataModel { city = "Karlsruhe", house_nr = 23, state = "Baden-Wuerttemberg", street = "Kronenstrasse", zip = 73021 };
-            var house3 = new PropertyDataModel { city = "Bonn", house_nr = 68, state = "Nordrhein-Westfalen", street = "Breite Strasse", zip = 53111 };
-            var house4 = new PropertyDataModel { city = "Tollwitz", house_nr = 6, state = "Sachsen-Anhalt", street = "Gewuerzstrasse", zip = 06231 };
-            DbContext.Properties.Add(house1);
-            DbContext.Properties.Add(house2);
-            DbContext.Properties.Add(house3);
-            DbContext.Properties.Add(house4);
-            DbContext.SaveChanges();
+            //var house1 = new PropertyDataModel { city = "Stuttgart", house_nr = 7, state = "Baden-Wuerttemberg", street = "Königsstrasse", zip = 70104 };
+            //var house2 = new PropertyDataModel { city = "Karlsruhe", house_nr = 23, state = "Baden-Wuerttemberg", street = "Kronenstrasse", zip = 73021 };
+            //var house3 = new PropertyDataModel { city = "Bonn", house_nr = 68, state = "Nordrhein-Westfalen", street = "Breite Strasse", zip = 53111 };
+            //var house4 = new PropertyDataModel { city = "Tollwitz", house_nr = 6, state = "Sachsen-Anhalt", street = "Gewuerzstrasse", zip = 06231 };
+            //DbContext.Properties.Add(house1);
+            //DbContext.Properties.Add(house2);
+            //DbContext.Properties.Add(house3);
+            //DbContext.Properties.Add(house4);
+            //DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -127,7 +126,7 @@ namespace PropertyManagement.Domain.ViewModels
         /// </summary>
         private void ExecuteSampleQuery()
         {
-            DbContext.Properties.ToList().ForEach(property => Debug.WriteLine($"id: {property.id}, street: {property.street} {property.house_nr}, zipcode: {property.zip}, city: {property.city}, state: {property.state}"));
+            //DbContext.Properties.ToList().ForEach(property => Debug.WriteLine($"id: {property.id}, street: {property.street} {property.house_nr}, zipcode: {property.zip}, city: {property.city}, state: {property.state}"));
         }
     }
 }
