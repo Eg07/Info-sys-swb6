@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PropertyManagement.Database.DataModels
 {
-    public partial class G3Unit
+    public class G3Unit
     {
         public G3Unit()
         {

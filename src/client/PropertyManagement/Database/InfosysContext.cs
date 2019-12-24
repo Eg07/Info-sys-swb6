@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database.DataModels;
 
-// ReSharper disable All
 namespace PropertyManagement.Database
 {
-    public class InfosysContext : DbContext
+    public partial class InfosysContext : DbContext
     {
         public InfosysContext()
         {
@@ -43,9 +42,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_address", "dbo");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -77,9 +74,6 @@ namespace PropertyManagement.Database
 
                 entity.ToTable("G3_Bank_Account", "dbo");
 
-                entity.HasIndex(e => e.TenantId)
-                    .HasName("fkIdx_114");
-
                 entity.Property(e => e.Iban)
                     .HasColumnName("IBAN")
                     .HasMaxLength(22)
@@ -98,15 +92,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Lease", "dbo");
 
-                entity.HasIndex(e => e.TenantId)
-                    .HasName("fkIdx_92");
-
-                entity.HasIndex(e => e.UnitId)
-                    .HasName("fkIdx_75");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Cost).HasColumnName("cost");
 
@@ -139,15 +125,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Monthly_paid", "dbo");
 
-                entity.HasIndex(e => e.Iban)
-                    .HasName("fkIdx_165");
-
-                entity.HasIndex(e => e.MonthlyPaymnetId)
-                    .HasName("fkIdx_168");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
 
@@ -180,12 +158,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Monthly_payment", "dbo");
 
-                entity.HasIndex(e => e.LeaseId)
-                    .HasName("fkIdx_137");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
@@ -206,12 +179,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Owner", "dbo");
 
-                entity.HasIndex(e => e.Adressid)
-                    .HasName("fkIdx_57");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Adressid).HasColumnName("adressid");
 
@@ -238,15 +206,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Property", "dbo");
 
-                entity.HasIndex(e => e.AdressId)
-                    .HasName("fkIdx_63");
-
-                entity.HasIndex(e => e.OwnerId)
-                    .HasName("fkIdx_60");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AdressId).HasColumnName("adressId");
 
@@ -269,15 +229,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Service", "dbo");
 
-                entity.HasIndex(e => e.PropertyId)
-                    .HasName("fkIdx_142");
-
-                entity.HasIndex(e => e.UnitId)
-                    .HasName("fkIdx_134");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Cost).HasColumnName("cost");
 
@@ -314,9 +266,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Tenant", "dbo");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
@@ -335,12 +285,7 @@ namespace PropertyManagement.Database
             {
                 entity.ToTable("G3_Unit", "dbo");
 
-                entity.HasIndex(e => e.PropertyId)
-                    .HasName("fkIdx_66");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Area).HasColumnName("area");
 
@@ -358,11 +303,10 @@ namespace PropertyManagement.Database
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_66");
             });
+
+            OnModelCreatingPartial(modelBuilder);
         }
 
-        void OnModelCreatingPartial(ModelBuilder modelBuilder)
-        {
-            throw new System.NotImplementedException();
-        }
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

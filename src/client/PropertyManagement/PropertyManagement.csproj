@@ -39,8 +39,4 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\DataModels\" />
-  </ItemGroup>
-
 </Project>

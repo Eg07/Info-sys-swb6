@@ -111,12 +111,32 @@ namespace PropertyManagement.Domain.ViewModels
         private void CreateSampleDataSet()
         {
             // references should be added later
-            var addressExample = new G3Address
+            var addressExample1 = new G3Address
             {
-                City = "Bonn", HouseNr = 68, State = "Nordrhein-Westfalen", Street = "Breite Straße", Zip = 53111,
-                G3Property = null, G3Owner = null
+                City = "Stuttgart",
+                HouseNr = 6,
+                State = "Baden-Württemberg",
+                Street = "Königsstraße",
+                Zip = 70173,
+                G3Property = null,
+                G3Owner = null
             };
-            DbContext.G3Address.Add(addressExample);
+            var addressExample2 = new G3Address
+            {
+                City = "Bonn",
+                HouseNr = 68,
+                State = "Nordrhein-Westfalen",
+                Street = "Breite Straße",
+                Zip = 53111,
+                G3Property = null,
+                G3Owner = null
+            };
+            // TODO: auto increment id field
+            // Add address
+            DbContext.G3Address.Add(addressExample1);
+            DbContext.G3Address.Add(addressExample2);
+            // remove all addresses
+            //DbContext.G3Address.ToList().ForEach(item => DbContext.G3Address.Remove(item));
             DbContext.SaveChanges();
         }
 

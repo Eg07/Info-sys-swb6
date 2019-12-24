@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PropertyManagement.Database.DataModels
 {
-    public partial class G3MonthlyPaid
+    public class G3MonthlyPaid
     {
         public int Id { get; set; }
         public double Amount { get; set; }

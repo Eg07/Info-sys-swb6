@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PropertyManagement.Database.DataModels
 {
-    public partial class G3Address
+    public class G3Address
     {
         public G3Address()
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PropertyManagement.Database.DataModels
 {
-    public partial class G3MonthlyPayment
+    public class G3MonthlyPayment
     {
         public G3MonthlyPayment()
         {
