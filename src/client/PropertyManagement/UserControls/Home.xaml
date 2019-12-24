@@ -48,18 +48,21 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel>
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Width="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadTenantManagementCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="PersonOutline" Height="48" Width="48" Margin="0 6 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Margin="8 0 0 0">Tenant Management</TextBlock>
                     </StackPanel>
                 </Button>
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadPropertyDataCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="HouseCityOutline" Height="48" Width="48" Margin="0 8 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Margin="16 0 0 0">Property Data</TextBlock>
                     </StackPanel>
                 </Button>
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadTransactionsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ImportExport" Height="48" Width="48" Margin="0 10 0 0" />

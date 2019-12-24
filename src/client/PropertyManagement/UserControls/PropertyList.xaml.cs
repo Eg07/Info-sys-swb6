@@ -6,6 +6,7 @@ namespace PropertyManagement.UserControls
     /// <summary>
     /// Interaction logic for PropertyList.xaml
     /// </summary>
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class PropertyList : UserControl
     {
         public PropertyList()

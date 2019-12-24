@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using PropertyManagement.Database;
+using PropertyManagement.Database.DataModels;
 using PropertyManagement.DataContainers;
 using PropertyManagement.UserControls;
 
@@ -17,7 +17,7 @@ namespace PropertyManagement.Domain.ViewModels
         /// <summary>
         /// The database context for accessing persisted data.
         /// </summary>
-        public readonly ApplicationDbContext DbContext;
+        public readonly InfosysContext DbContext;
 
         /// <summary>
         /// The menu items in the navigation drawer
@@ -73,11 +73,11 @@ namespace PropertyManagement.Domain.ViewModels
 
             // TODO: move to own method
             // try to establish connection with database
-            DbContext = new ApplicationDbContext();
+            DbContext = new InfosysContext();
             DbContext.Database.EnsureCreated();
             
             // TODO: remove later
-            //CreateSampleDataSet();
+            CreateSampleDataSet();
             //ExecuteSampleQuery();
         }
 
@@ -110,15 +110,14 @@ namespace PropertyManagement.Domain.ViewModels
         /// </summary>
         private void CreateSampleDataSet()
         {
-            //var house1 = new PropertyDataModel { city = "Stuttgart", house_nr = 7, state = "Baden-Wuerttemberg", street = "Königsstrasse", zip = 70104 };
-            //var house2 = new PropertyDataModel { city = "Karlsruhe", house_nr = 23, state = "Baden-Wuerttemberg", street = "Kronenstrasse", zip = 73021 };
-            //var house3 = new PropertyDataModel { city = "Bonn", house_nr = 68, state = "Nordrhein-Westfalen", street = "Breite Strasse", zip = 53111 };
-            //var house4 = new PropertyDataModel { city = "Tollwitz", house_nr = 6, state = "Sachsen-Anhalt", street = "Gewuerzstrasse", zip = 06231 };
-            //DbContext.Properties.Add(house1);
-            //DbContext.Properties.Add(house2);
-            //DbContext.Properties.Add(house3);
-            //DbContext.Properties.Add(house4);
-            //DbContext.SaveChanges();
+            // references should be added later
+            var addressExample = new G3Address
+            {
+                City = "Bonn", HouseNr = 68, State = "Nordrhein-Westfalen", Street = "Breite Straße", Zip = 53111,
+                G3Property = null, G3Owner = null
+            };
+            DbContext.G3Address.Add(addressExample);
+            DbContext.SaveChanges();
         }
 
         /// <summary>
