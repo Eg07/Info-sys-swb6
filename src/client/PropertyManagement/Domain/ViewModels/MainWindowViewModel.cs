@@ -66,19 +66,26 @@ namespace PropertyManagement.Domain.ViewModels
         public MainWindowViewModel(ISnackbarMessageQueue snackbarMessageQueue)
         {
             if (snackbarMessageQueue == null) throw new ArgumentNullException(nameof(snackbarMessageQueue));
-            
-            RegisterCommands();
-            GenerateNavigationDrawer();
-            DisplayHome();
 
             // TODO: move to own method
             // try to establish connection with database
             DbContext = new InfosysContext();
             DbContext.Database.EnsureCreated();
-            
+
+            // assign DbContext to ViewModels
+            PropertyDataViewModel.InfoSysDbContext = DbContext;
+
             // TODO: remove later
-            CreateSampleDataSet();
+            //CreateSampleDataSet();
             //ExecuteSampleQuery();
+            // TODO: remove later
+
+            // commands to switch views
+            RegisterCommands();
+            // main navigation drawer visible on every view
+            GenerateNavigationDrawer();
+            // go to home site on startup
+            DisplayHome();
         }
 
         private void GenerateNavigationDrawer()
@@ -131,10 +138,10 @@ namespace PropertyManagement.Domain.ViewModels
                 G3Property = null,
                 G3Owner = null
             };
-            // TODO: auto increment id field
             // Add address
             DbContext.G3Address.Add(addressExample1);
             DbContext.G3Address.Add(addressExample2);
+            DbContext.SaveChanges();
             // remove all addresses
             //DbContext.G3Address.ToList().ForEach(item => DbContext.G3Address.Remove(item));
             DbContext.SaveChanges();

@@ -1,5 +1,6 @@
 ﻿using System;
 
+// ReSharper disable All
 namespace PropertyManagement.Database.DataModels
 {
     public class G3MonthlyPaid

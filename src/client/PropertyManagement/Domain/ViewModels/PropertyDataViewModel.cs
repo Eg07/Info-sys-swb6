@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using PropertyManagement.Database;
 using PropertyManagement.DataContainers;
 
 namespace PropertyManagement.Domain.ViewModels
 {
     public class PropertyDataViewModel : ViewModelBase
     {
+        public static InfosysContext InfoSysDbContext;
         private ObservableCollection<SelectableItem> _items3;
         private bool? _isAllItems3Selected;
 
@@ -45,13 +48,14 @@ namespace PropertyManagement.Domain.ViewModels
 
         private static ObservableCollection<SelectableItem> CreateData()
         {
+            var randomData = InfoSysDbContext.G3Address.FirstOrDefault();
             return new ObservableCollection<SelectableItem>
             {
                 new SelectableItem
                 {
                     Id = 1,
-                    Name = "Material Design",
-                    Description = "Material Design in XAML Toolkit"
+                    Name = randomData.City,
+                    Description = randomData.State
                 },
                 new SelectableItem
                 {

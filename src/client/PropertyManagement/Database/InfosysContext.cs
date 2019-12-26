@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database.DataModels;
 
+// ReSharper disable All
 namespace PropertyManagement.Database
 {
     public partial class InfosysContext : DbContext
