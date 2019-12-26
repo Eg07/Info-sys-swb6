@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database.DataModels;
 
 // ReSharper disable All
@@ -13,6 +14,47 @@ namespace PropertyManagement.Database
         public InfosysContext(DbContextOptions<InfosysContext> options)
             : base(options)
         {
+        }
+
+        /// <summary>
+        /// Creates some sample data for address table
+        /// </summary>
+        public void CreateSampleAddressDataSet()
+        {
+            // references should be added later
+            var addressExample1 = new G3Address
+            {
+                City = "Stuttgart",
+                HouseNr = 6,
+                State = "Baden-Württemberg",
+                Street = "Königsstraße",
+                Zip = 70173,
+                G3Property = null,
+                G3Owner = null
+            };
+            var addressExample2 = new G3Address
+            {
+                City = "Bonn",
+                HouseNr = 68,
+                State = "Nordrhein-Westfalen",
+                Street = "Breite Straße",
+                Zip = 53111,
+                G3Property = null,
+                G3Owner = null
+            };
+            // Add address
+            G3Address.Add(addressExample1);
+            G3Address.Add(addressExample2);
+            SaveChanges();
+        }
+
+        /// <summary>
+        /// Remove all addresses from the table
+        /// </summary>
+        public void DeleteSampleAddressDataSet()
+        {
+            G3Address.ToList().ForEach(item => G3Address.Remove(item));
+            SaveChanges();
         }
 
         public virtual DbSet<G3Address> G3Address { get; set; }

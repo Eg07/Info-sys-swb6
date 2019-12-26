@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using PropertyManagement.Database;
-using PropertyManagement.Database.DataModels;
 using PropertyManagement.DataContainers;
 using PropertyManagement.UserControls;
 
@@ -76,8 +75,8 @@ namespace PropertyManagement.Domain.ViewModels
             PropertyDataViewModel.InfoSysDbContext = DbContext;
 
             // TODO: remove later
-            //CreateSampleDataSet();
-            //ExecuteSampleQuery();
+            //DbContext.CreateSampleAddressDataSet();
+            //DbContext.DeleteSampleAddressDataSet();
             // TODO: remove later
 
             // commands to switch views
@@ -110,49 +109,6 @@ namespace PropertyManagement.Domain.ViewModels
             LoadPropertyDataCommand = new CommandImplementation(o => DisplayPropertyData());
             LoadTenantManagementCommand = new CommandImplementation(o => DisplayTenantManagement());
             LoadTransactionsCommand = new CommandImplementation(o => DisplayTransactions());
-        }
-
-        /// <summary>
-        /// Creates some sample data for property table
-        /// </summary>
-        private void CreateSampleDataSet()
-        {
-            // references should be added later
-            var addressExample1 = new G3Address
-            {
-                City = "Stuttgart",
-                HouseNr = 6,
-                State = "Baden-Württemberg",
-                Street = "Königsstraße",
-                Zip = 70173,
-                G3Property = null,
-                G3Owner = null
-            };
-            var addressExample2 = new G3Address
-            {
-                City = "Bonn",
-                HouseNr = 68,
-                State = "Nordrhein-Westfalen",
-                Street = "Breite Straße",
-                Zip = 53111,
-                G3Property = null,
-                G3Owner = null
-            };
-            // Add address
-            DbContext.G3Address.Add(addressExample1);
-            DbContext.G3Address.Add(addressExample2);
-            DbContext.SaveChanges();
-            // remove all addresses
-            //DbContext.G3Address.ToList().ForEach(item => DbContext.G3Address.Remove(item));
-            DbContext.SaveChanges();
-        }
-
-        /// <summary>
-        /// Performs a SELECT * over the Properties table
-        /// </summary>
-        private void ExecuteSampleQuery()
-        {
-            //DbContext.Properties.ToList().ForEach(property => Debug.WriteLine($"id: {property.id}, street: {property.street} {property.house_nr}, zipcode: {property.zip}, city: {property.city}, state: {property.state}"));
         }
     }
 }

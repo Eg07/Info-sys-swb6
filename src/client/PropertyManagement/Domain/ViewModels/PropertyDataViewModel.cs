@@ -1,27 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using PropertyManagement.Database;
+using PropertyManagement.Database.DataModels;
 using PropertyManagement.DataContainers;
 
 namespace PropertyManagement.Domain.ViewModels
 {
     public class PropertyDataViewModel : ViewModelBase
     {
+        public ObservableCollection<G3Unit> PropertyUnits { get; }
         public static InfosysContext InfoSysDbContext;
-        private ObservableCollection<SelectableItem> _items3;
         private bool? _isAllItems3Selected;
-
+        
         public PropertyDataViewModel()
         {
-            _items3 = CreateData();
-
-            Task.Factory.StartNew(() =>
-            {
-                Task.Delay(1000).Wait();
-                _items3[2].Description = "Whatever";
-            });
+            PropertyUnits = new ObservableCollection<G3Unit>(InfoSysDbContext.G3Unit.ToList());
         }
 
         public bool? IsAllItems3Selected
@@ -33,22 +27,22 @@ namespace PropertyManagement.Domain.ViewModels
 
                 _isAllItems3Selected = value;
 
-                if (_isAllItems3Selected.HasValue)
-                    SelectAll(_isAllItems3Selected.Value, Items3);
+                //if (_isAllItems3Selected.HasValue)
+                //    SelectAll(_isAllItems3Selected.Value, PropertyUnits);
 
                 OnPropertyChanged("IsAllItems3Selected");
             }
         }
 
-        private static void SelectAll(bool select, IEnumerable<SelectableItem> models)
-        {
-            foreach (var model in models)
-                model.IsSelected = select;
-        }
+        //private static void SelectAll(bool select, IEnumerable<G3Unit> models)
+        //{
+        //    foreach (var model in models)
+        //        model.IsSelected = select;
+        //}
 
         private static ObservableCollection<SelectableItem> CreateData()
         {
-            var randomData = InfoSysDbContext.G3Address.FirstOrDefault();
+            var randomData = InfoSysDbContext.G3Address.First();
             return new ObservableCollection<SelectableItem>
             {
                 new SelectableItem
@@ -73,7 +67,7 @@ namespace PropertyManagement.Domain.ViewModels
             };
         }
 
-        public ObservableCollection<SelectableItem> Items3 => _items3;
+        
 
         //public event PropertyChangedEventHandler PropertyChanged;
 
