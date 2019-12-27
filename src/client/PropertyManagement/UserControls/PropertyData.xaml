@@ -90,8 +90,8 @@
                     <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
                     <materialDesign:DataGridTextColumn Binding="{Binding RoomsNr}" Header="Number of rooms" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                     <!-- set a max length to get an indicator in the editor -->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Area}" Header="Living space (m²)" MaxLength="255" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Monthly rent ($)" MaxLength="255" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding Area}" Header="Living space (m²)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Monthly rent ($)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
 
                 </DataGrid.Columns>
             </DataGrid>

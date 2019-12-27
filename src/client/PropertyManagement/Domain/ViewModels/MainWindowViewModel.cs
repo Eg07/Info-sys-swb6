@@ -77,7 +77,7 @@ namespace PropertyManagement.Domain.ViewModels
             // TODO: remove later
             //DbContext.CreateSampleAddressDataSet();
             //DbContext.DeleteSampleAddressDataSet();
-            //DbContext
+            //DbContext.CreateSampleLeaseDataSet();
             // TODO: remove later
 
             // commands to switch views

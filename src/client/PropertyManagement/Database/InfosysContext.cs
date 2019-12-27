@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database.DataModels;
 
@@ -83,7 +84,7 @@ namespace PropertyManagement.Database
         /// </summary>
         public void CreateSampleUnitDataSet()
         {
-            var unitExample = new G3Unit()
+            var unitExample1 = new G3Unit()
             {
                 RoomsNr = 3,
                 Area = 51.7,
@@ -95,7 +96,34 @@ namespace PropertyManagement.Database
                 Property = null
             };
 
-            G3Unit.Add(unitExample);
+            G3Unit.Add(unitExample1);
+            SaveChanges();
+        }
+
+        public void CreateSampleTenantDataSet()
+        {
+            var tenantExample1 = new G3Tenant()
+            {
+                FirstName = "Vanesa",
+                LastName = "Ramsay"
+            };
+
+            G3Tenant.Add(tenantExample1);
+            SaveChanges();
+        }
+
+        public void CreateSampleLeaseDataSet()
+        {
+            var leaseExample1 = new G3Lease()
+            {
+                Cost = 1300,
+                EndDate = DateTime.Today.AddYears(10),
+                StartDate = DateTime.Today,
+                UnitId = 2,
+                TenantId = 1
+            };
+
+            G3Lease.Add(leaseExample1);
             SaveChanges();
         }
 
