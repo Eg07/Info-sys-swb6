@@ -48,6 +48,57 @@ namespace PropertyManagement.Database
             SaveChanges();
         }
 
+        public void CreateSampleOwnerDataSet()
+        {
+            var ownerExample1 = new G3Owner()
+            {
+                Adressid = 1,
+                FirstName = "Kimora",
+                LastName = "Bain",
+                G3Property = null
+            };
+
+            G3Owner.Add(ownerExample1);
+            SaveChanges();
+        }
+
+        public void CreateSamplePropertyDataSet()
+        {
+            var propertyExample1 = new G3Property()
+            {
+                AdressId = 2,
+                OwnerId = 1,
+                Adress = null,
+                G3Service = null,
+                G3Unit = null,
+                Owner = null
+            };
+
+            G3Property.Add(propertyExample1);
+            SaveChanges();
+        }
+
+        /// <summary>
+        /// Creates some sample data for unit table
+        /// </summary>
+        public void CreateSampleUnitDataSet()
+        {
+            var unitExample = new G3Unit()
+            {
+                RoomsNr = 3,
+                Area = 51.7,
+                Floor = 1,
+                ResidentNr = 1,
+                PropertyId = 1,
+                G3Lease = null,
+                G3Service = null,
+                Property = null
+            };
+
+            G3Unit.Add(unitExample);
+            SaveChanges();
+        }
+
         /// <summary>
         /// Remove all addresses from the table
         /// </summary>

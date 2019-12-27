@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using PropertyManagement.Database;
 using PropertyManagement.Database.DataModels;
@@ -42,15 +41,9 @@ namespace PropertyManagement.Domain.ViewModels
 
         private static ObservableCollection<SelectableItem> CreateData()
         {
-            var randomData = InfoSysDbContext.G3Address.First();
+            var randomData = InfoSysDbContext.G3Unit.First();
             return new ObservableCollection<SelectableItem>
             {
-                new SelectableItem
-                {
-                    Id = 1,
-                    Name = randomData.City,
-                    Description = randomData.State
-                },
                 new SelectableItem
                 {
                     Id = 2,

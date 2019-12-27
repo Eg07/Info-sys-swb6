@@ -73,7 +73,7 @@
         </Grid>
         <!-- TABLE -->
         <Grid Grid.Row="2" Margin="15">
-            <DataGrid Margin="0 8 0 0" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+            <DataGrid Margin="0 8 0 0" ItemsSource="{Binding PropertyUnits}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
               materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Binding="{Binding IsSelected}" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
@@ -88,9 +88,9 @@
                     </DataGridCheckBoxColumn>
                     <DataGridTextColumn Binding="{Binding Id}" Header="Id" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
                     <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Name}" Header="Number of rooms" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding RoomsNr}" Header="Number of rooms" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                     <!-- set a max length to get an indicator in the editor -->
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Living space (m²)" MaxLength="255" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding Area}" Header="Living space (m²)" MaxLength="255" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                     <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Monthly rent ($)" MaxLength="255" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
 
                 </DataGrid.Columns>

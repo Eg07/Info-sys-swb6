@@ -77,13 +77,14 @@ namespace PropertyManagement.Domain.ViewModels
             // TODO: remove later
             //DbContext.CreateSampleAddressDataSet();
             //DbContext.DeleteSampleAddressDataSet();
+            //DbContext
             // TODO: remove later
 
             // commands to switch views
             RegisterCommands();
-            // main navigation drawer visible on every view
+            // generate main navigation drawer visible on every view
             GenerateNavigationDrawer();
-            // go to home site on startup
+            // go to home view on startup
             DisplayHome();
         }
 
