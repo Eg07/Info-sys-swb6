@@ -28,6 +28,9 @@
             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
                 <userControls:Home />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PropertyListViewModel}">
+                <userControls:PropertyList />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:PropertyDataViewModel}">
                 <userControls:PropertyData />
             </DataTemplate>
@@ -78,8 +81,6 @@
                                 <uiElements:PaletteSelector Grid.Column="0" Margin="0 0 35 0"></uiElements:PaletteSelector>
                                 <materialDesign:PopupBox Grid.Column="1" DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                                     <StackPanel>
-                                        <Button Content="Home Page" Command="{Binding Path=LoadPropertyDataCommand}" />
-                                        <Separator/>
                                         <Button Content="Exit" Click="MenuPopupButton_OnClick"/>
                                     </StackPanel>
                                 </materialDesign:PopupBox>

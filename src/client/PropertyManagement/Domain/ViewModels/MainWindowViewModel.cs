@@ -40,19 +40,25 @@ namespace PropertyManagement.Domain.ViewModels
                 OnPropertyChanged("CurrentViewModel");
             }
         }
-        
+
+        #region Navigation
+
         // commands for loading the different user views
         public ICommand LoadHomeCommand { get; private set; }
+        public ICommand LoadPropertyListCommand { get; private set; }
         public ICommand LoadPropertyDataCommand { get; private set; }
         public ICommand LoadTenantManagementCommand { get; private set; }
         public ICommand LoadTransactionsCommand { get; private set; }
-        
+
         // view model change bound to methods
         public void DisplayHome() => CurrentViewModel = (HomeViewModel)_userControls.Values.OfType<Home>().First().DataContext;
         public void DisplayTenantManagement() => CurrentViewModel = (TenantManagementViewModel)_userControls.Values.OfType<TenantManagement>().First().DataContext;
+        public void DisplayPropertyList() => CurrentViewModel = (PropertyListViewModel)_userControls.Values.OfType<PropertyList>().First().DataContext;
         public void DisplayPropertyData() => CurrentViewModel = (PropertyDataViewModel)_userControls.Values.OfType<PropertyData>().First().DataContext;
         public void DisplayTransactions() => CurrentViewModel = (TransactionsViewModel)_userControls.Values.OfType<Transactions>().First().DataContext;
 
+        #endregion
+        
         /// <summary>
         /// Complete set of our user views
         /// </summary>
@@ -92,7 +98,7 @@ namespace PropertyManagement.Domain.ViewModels
         {
             _userControls.Add("Home", new Home());
             _userControls.Add("TenantManagement", new TenantManagement());
-            _userControls.Add("PropertyData", new PropertyData());
+            _userControls.Add("PropertyData", new PropertyList());
             _userControls.Add("Transactions", new Transactions());
             MenuItems = new NavigationMenuItem[_userControls.Count];
 
@@ -107,6 +113,7 @@ namespace PropertyManagement.Domain.ViewModels
         private void RegisterCommands()
         {
             LoadHomeCommand = new CommandImplementation(o => DisplayHome());
+            LoadPropertyListCommand = new CommandImplementation(o => DisplayPropertyList());
             LoadPropertyDataCommand = new CommandImplementation(o => DisplayPropertyData());
             LoadTenantManagementCommand = new CommandImplementation(o => DisplayTenantManagement());
             LoadTransactionsCommand = new CommandImplementation(o => DisplayTransactions());

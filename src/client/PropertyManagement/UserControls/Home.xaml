@@ -56,7 +56,7 @@
                     </StackPanel>
                 </Button>
                 <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadPropertyDataCommand}">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadPropertyListCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="HouseCityOutline" Height="48" Width="48" Margin="0 8 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Margin="16 0 0 0">Property Data</TextBlock>

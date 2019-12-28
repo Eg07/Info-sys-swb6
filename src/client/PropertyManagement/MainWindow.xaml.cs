@@ -78,7 +78,7 @@ namespace PropertyManagement
             if (userControlName.Split('.').Last() == "Home")
                 view.DisplayHome();
             else if (userControlName.Split('.').Last() == "PropertyData")
-                view.DisplayPropertyData();
+                view.DisplayPropertyList();
             else if (userControlName.Split('.').Last() == "Transactions")
                 view.DisplayTransactions();
             else if (userControlName.Split('.').Last() == "TenantManagement")

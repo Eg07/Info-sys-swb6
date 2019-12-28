@@ -92,7 +92,6 @@
                     <!-- set a max length to get an indicator in the editor -->
                     <materialDesign:DataGridTextColumn Binding="{Binding Area}" Header="Living space (m²)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                     <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Monthly rent ($)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

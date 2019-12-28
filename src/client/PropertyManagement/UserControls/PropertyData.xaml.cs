@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using PropertyManagement.Domain.ViewModels;
 
 namespace PropertyManagement.UserControls
