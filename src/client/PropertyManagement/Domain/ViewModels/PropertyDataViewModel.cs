@@ -1,20 +1,31 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database;
 using PropertyManagement.Database.DataModels;
-using PropertyManagement.DataContainers;
 
 namespace PropertyManagement.Domain.ViewModels
 {
     public class PropertyDataViewModel : ViewModelBase
     {
+        public string Street { get; set; }
+        public string City { get; set; }
+        public int Zipcode { get; set; }
+        public string State { get; set; }
         public ObservableCollection<G3Unit> PropertyUnits { get; }
+
         public static InfosysContext InfoSysDbContext;
         private bool? _isAllItems3Selected;
         
         public PropertyDataViewModel()
         {
             PropertyUnits = new ObservableCollection<G3Unit>(InfoSysDbContext.G3Unit.ToList());
+
+            var property = InfoSysDbContext.G3Property.Include("Adress").First();
+            Street = property.Adress.Street;
+            City = property.Adress.City;
+            Zipcode = property.Adress.Zip;
+            State = property.Adress.State;
         }
 
         public bool? IsAllItems3Selected
@@ -38,29 +49,6 @@ namespace PropertyManagement.Domain.ViewModels
         //    foreach (var model in models)
         //        model.IsSelected = select;
         //}
-
-        private static ObservableCollection<SelectableItem> CreateData()
-        {
-            var randomData = InfoSysDbContext.G3Unit.First();
-            return new ObservableCollection<SelectableItem>
-            {
-                new SelectableItem
-                {
-                    Id = 2,
-                    Name = "Dragablz",
-                    Description = "Dragablz Tab Control",
-                    Food = "Fries"
-                },
-                new SelectableItem
-                {
-                    Id = 3,
-                    Name = "Predator",
-                    Description = "If it bleeds, we can kill it"
-                }
-            };
-        }
-
-        
 
         //public event PropertyChangedEventHandler PropertyChanged;
 
