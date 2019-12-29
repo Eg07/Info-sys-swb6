@@ -3,19 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PropertyManagement"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             DataContext="MainWindowViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView ItemsSource="{Binding Items3}">
+        <ListView ItemsSource="{Binding Properties}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Street}" Header="Street" />
-                    <GridViewColumn DisplayMemberBinding="{Binding City}" Header="City" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Zipcode}" Header="Zipcode" />
-                    <GridViewColumn DisplayMemberBinding="{Binding State}" Header="State" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Adress.Street}" Header="Street" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Adress.City}" Header="City" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Adress.Zip}" Header="Zipcode" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Adress.State}" Header="State" />
                 </GridView>
             </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
 </UserControl>

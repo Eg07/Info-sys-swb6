@@ -31,10 +31,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
                 <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap">What do you want to do today?</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Height="auto"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Left}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Binoculars" Height="24" Width="24" Margin="0 5 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="8 5 0 0"><Run Text="EXPLORE"/></TextBlock>

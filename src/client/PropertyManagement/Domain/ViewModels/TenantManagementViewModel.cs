@@ -2,9 +2,5 @@
 {
     public class TenantManagementViewModel : ViewModelBase
     {
-
-        public TenantManagementViewModel()
-        {
-        }
     }
 }

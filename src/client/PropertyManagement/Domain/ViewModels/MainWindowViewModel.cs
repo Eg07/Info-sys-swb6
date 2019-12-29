@@ -75,11 +75,15 @@ namespace PropertyManagement.Domain.ViewModels
             // TODO: move to own method
             // try to establish connection with database
             DbContext = new InfosysContext();
+            snackbarMessageQueue.Enqueue("✔️ Database connection successfully established");
             DbContext.Database.EnsureCreated();
 
+
+            // TODO: assign on base
             // assign DbContext to ViewModels
             PropertyDataViewModel.InfoSysDbContext = DbContext;
-
+            PropertyListViewModel.InfoSysDbContext = DbContext;
+            
             // TODO: remove later
             //DbContext.CreateSampleAddressDataSet();
             //DbContext.DeleteSampleAddressDataSet();
@@ -97,14 +101,20 @@ namespace PropertyManagement.Domain.ViewModels
         private void GenerateNavigationDrawer()
         {
             _userControls.Add("Home", new Home());
-            _userControls.Add("TenantManagement", new TenantManagement());
-            _userControls.Add("PropertyData", new PropertyList());
+            _userControls.Add("Tenant Management", new TenantManagement());
+            _userControls.Add("Managed Properties", new PropertyList());
             _userControls.Add("Transactions", new Transactions());
             MenuItems = new NavigationMenuItem[_userControls.Count];
-
+            
             // add the UserControls to the navigation drawer
             for (var i = 0; i < _userControls.Count; i++)
                 MenuItems[i] = new NavigationMenuItem(_userControls.Keys.ElementAt(i), _userControls.Values.ElementAt(i));
+
+            // add controls not shown in drawer
+            _userControls.Add("PropertyData", new PropertyData());
+
+            // assign related data
+            PropertyList.NavigationContext = this;
         }
 
         /// <summary>

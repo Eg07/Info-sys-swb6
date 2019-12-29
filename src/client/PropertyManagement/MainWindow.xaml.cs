@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -24,19 +22,6 @@ namespace PropertyManagement
         public MainWindow()
         {
             InitializeComponent();
-
-            // How to use the snackbar
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-            }).ContinueWith(t =>
-            {
-                //note you can use the message queue from any thread, but just for the demo here we 
-                //need to get the message queue from the
-                //, so need to be on the dispatcher
-                MainSnackbar.MessageQueue.Enqueue("Welcome to your personal property management!");
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-
             DataContext = new MainWindowViewModel(MainSnackbar.MessageQueue);
             Snackbar = MainSnackbar;
         }
