@@ -15,7 +15,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
                     <GridViewColumn DisplayMemberBinding="{Binding Adress.Street}" Header="Street" />
                     <GridViewColumn DisplayMemberBinding="{Binding Adress.City}" Header="City" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Adress.Zip}" Header="Zipcode" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Adress.Zip}" Header="Zip code" />
                     <GridViewColumn DisplayMemberBinding="{Binding Adress.State}" Header="State" />
                 </GridView>
             </ListView.View>

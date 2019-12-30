@@ -43,10 +43,10 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <TextBox materialDesign:HintAssist.Hint="Street" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" />
-                    <TextBox materialDesign:HintAssist.Hint="City" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
-                    <TextBox materialDesign:HintAssist.Hint="Zipcode" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
-                    <TextBox materialDesign:HintAssist.Hint="State" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
+                    <TextBox materialDesign:HintAssist.Hint="Street" Text="{Binding Path=Street}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" />
+                    <TextBox materialDesign:HintAssist.Hint="City" Text="{Binding Path=City}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
+                    <TextBox materialDesign:HintAssist.Hint="Zip code" Text="{Binding Path=Zipcode}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
+                    <TextBox materialDesign:HintAssist.Hint="State" Text="{Binding Path=State}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Update Property Details">
@@ -91,7 +91,7 @@
                     <materialDesign:DataGridTextColumn Binding="{Binding RoomsNr}" Header="Number of rooms" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                     <!-- set a max length to get an indicator in the editor -->
                     <materialDesign:DataGridTextColumn Binding="{Binding Area}" Header="Living space (m²)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                    <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Monthly rent ($)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding G3Lease.Cost}" Header="Monthly rent ($)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

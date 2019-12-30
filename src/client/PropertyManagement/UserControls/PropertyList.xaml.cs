@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Controls;
+using PropertyManagement.Database.DataModels;
 using PropertyManagement.Domain.ViewModels;
 
 namespace PropertyManagement.UserControls
@@ -20,8 +21,8 @@ namespace PropertyManagement.UserControls
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var test = (ListViewItem) sender;
-            var test2 = test.DataContext;
+            var selectedProperty = (G3Property)((ListViewItem)sender).DataContext;
+            PropertyDataViewModel.Id = selectedProperty.Id;
             NavigationContext.DisplayPropertyData();
         }
     }
