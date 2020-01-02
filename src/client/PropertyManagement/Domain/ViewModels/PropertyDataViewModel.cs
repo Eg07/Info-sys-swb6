@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database;
-using PropertyManagement.Database.DataModels;
+using PropertyManagement.DataContainers;
 
 namespace PropertyManagement.Domain.ViewModels
 {
@@ -13,7 +14,7 @@ namespace PropertyManagement.Domain.ViewModels
         public string City { get; set; }
         public int Zipcode { get; set; }
         public string State { get; set; }
-        public ObservableCollection<G3Unit> PropertyUnits { get; }
+        public ObservableCollection<UnitDisplayContainer> PropertyUnits { get; }
 
         public static InfosysContext InfoSysDbContext;
 
@@ -34,7 +35,10 @@ namespace PropertyManagement.Domain.ViewModels
             City = property.Adress.City;
             Zipcode = property.Adress.Zip;
             State = property.Adress.State;
-            PropertyUnits = new ObservableCollection<G3Unit>(property.G3Unit);
+
+            var displayContainerList = new List<UnitDisplayContainer>();
+            property.G3Unit.ToList().ForEach(unit => displayContainerList.Add(new UnitDisplayContainer(unit)));
+            PropertyUnits = new ObservableCollection<UnitDisplayContainer>(displayContainerList);
         }
     }
 }

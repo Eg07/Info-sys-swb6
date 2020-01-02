@@ -91,7 +91,8 @@
                     <materialDesign:DataGridTextColumn Binding="{Binding RoomsNr}" Header="Number of rooms" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                     <!-- set a max length to get an indicator in the editor -->
                     <materialDesign:DataGridTextColumn Binding="{Binding Area}" Header="Living space (m²)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                    <materialDesign:DataGridTextColumn Binding="{Binding G3Lease.Cost}" Header="Monthly rent ($)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding MonthlyRent}" Header="Monthly rent ($)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding TenantNames}" Header="Tenants" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

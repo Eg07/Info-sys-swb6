@@ -6,13 +6,15 @@ namespace PropertyManagement.DataContainers
 {
     public class UnitDisplayContainer : G3Unit
     {
-        public double MonthlyRent { get; }
-        public string TenantName { get; }
+        // TODO: Implement IsSelected to enable DELETE functionality
+
+        public double MonthlyRent { get; set; }
+        public string TenantNames { get; set; }
 
         public UnitDisplayContainer(G3Unit unit) : base(unit)
         {
             MonthlyRent = unit.G3Lease.Sum(lease => lease.Cost);
-            TenantName = GetTenantsForUnit(unit);
+            TenantNames = GetTenantsForUnit(unit);
         }
 
         /// <summary>
