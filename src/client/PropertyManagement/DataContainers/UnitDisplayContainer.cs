@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using PropertyManagement.Database.DataModels;
 
@@ -6,10 +7,20 @@ namespace PropertyManagement.DataContainers
 {
     public class UnitDisplayContainer : G3Unit
     {
-        // TODO: Implement IsSelected to enable DELETE functionality
-
+        private bool _isSelected;
         public double MonthlyRent { get; set; }
         public string TenantNames { get; set; }
+        // TODO: maybe implement IsSelected as Interface
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                Console.WriteLine(_isSelected);
+            }
+        }
 
         public UnitDisplayContainer(G3Unit unit) : base(unit)
         {
