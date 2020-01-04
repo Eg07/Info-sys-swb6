@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
-using PropertyManagement.Database;
 using PropertyManagement.Database.DataModels;
 using PropertyManagement.DataContainers;
 
@@ -26,17 +27,33 @@ namespace PropertyManagement.Domain.ViewModels
             PopulateDynamicData();
         }
 
-        public void UpdateDatabaseData()
+        private void UpdateDatabaseData()
         {
-            InfoSysDbContext.G3Property.Update(Property);
-            InfoSysDbContext.SaveChanges();
-            Snackbar.Enqueue("Property data successfully updated");
+            try
+            {
+                InfoSysDbContext.G3Property.Update(Property);
+                InfoSysDbContext.SaveChanges();
+                Snackbar.Enqueue("Property data successfully updated");
+            }
+            catch (Exception e)
+            {
+                Snackbar.Enqueue("Update operation failed.");
+                Debug.WriteLine(e);
+            }
         }
 
-        public void DeleteDatabaseEntry()
+        private void DeleteDatabaseEntry()
         {
-            InfoSysDbContext.Remove(Property);
-            InfoSysDbContext.SaveChanges();
+            try
+            {
+                InfoSysDbContext.Remove(Property);
+                InfoSysDbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Snackbar.Enqueue("Delete operation failed.");
+                Debug.WriteLine(e);
+            }
         }
 
         private void PopulateDynamicData()
