@@ -76,19 +76,13 @@ namespace PropertyManagement.Domain.ViewModels
             // try to establish connection with database
             DbContext = new InfosysContext();
             snackbarMessageQueue.Enqueue("✔️ Database connection successfully established");
-            DbContext.Database.EnsureCreated();
+            //DbContext.Database.EnsureCreated();
 
 
             // TODO: assign on base
             // assign DbContext to ViewModels
             PropertyDataViewModel.InfoSysDbContext = DbContext;
             PropertyListViewModel.InfoSysDbContext = DbContext;
-            
-            // TODO: remove later
-            //DbContext.CreateSampleAddressDataSet();
-            //DbContext.DeleteSampleAddressDataSet();
-            //DbContext.CreateSampleLeaseDataSet();
-            // TODO: remove later
 
             // commands to switch views
             RegisterCommands();

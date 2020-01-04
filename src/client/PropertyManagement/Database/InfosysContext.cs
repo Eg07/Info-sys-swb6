@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database.DataModels;
@@ -8,13 +9,36 @@ namespace PropertyManagement.Database
 {
     public partial class InfosysContext : DbContext
     {
+        public virtual DbSet<G3Address> G3Address { get; set; }
+        public virtual DbSet<G3BankAccount> G3BankAccount { get; set; }
+        public virtual DbSet<G3Lease> G3Lease { get; set; }
+        public virtual DbSet<G3MonthlyPaid> G3MonthlyPaid { get; set; }
+        public virtual DbSet<G3MonthlyPayment> G3MonthlyPayment { get; set; }
+        public virtual DbSet<G3Owner> G3Owner { get; set; }
+        public virtual DbSet<G3Property> G3Property { get; set; }
+        public virtual DbSet<G3Service> G3Service { get; set; }
+        public virtual DbSet<G3Tenant> G3Tenant { get; set; }
+        public virtual DbSet<G3Unit> G3Unit { get; set; }
+
         public InfosysContext()
         {
+            DeleteSampleAddressDataSet(G3Address);
+            //ResetIdentitySeed("G3_address");
         }
 
         public InfosysContext(DbContextOptions<InfosysContext> options)
             : base(options)
         {
+        }
+
+        /// <summary>
+        /// Resetes the identity seed of a table.
+        /// </summary>
+        /// <param name="tableName">The name of the table.</param>
+        /// <param name="seed">The value to reset the seed to.</param>
+        public void ResetIdentitySeed(string tableName, int seed = 0)
+        {
+            Database.ExecuteSqlInterpolated($"DBCC CHECKIDENT ('[dbo].[{tableName}]', RESEED, {seed})");
         }
 
         /// <summary>
@@ -130,29 +154,29 @@ namespace PropertyManagement.Database
         /// <summary>
         /// Remove all addresses from the table
         /// </summary>
-        public void DeleteSampleAddressDataSet()
+        public void DeleteSampleAddressDataSet<T>(DbSet<T> set) where T : class
         {
-            G3Address.ToList().ForEach(item => G3Address.Remove(item));
-            SaveChanges();
+            try
+            {
+                set.ToList().ForEach(entry => set.Remove(entry));
+                SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                // TODO: if used by front end print out error message (snackbar)
+                Debug.WriteLine(e);
+            }
         }
-
-        public virtual DbSet<G3Address> G3Address { get; set; }
-        public virtual DbSet<G3BankAccount> G3BankAccount { get; set; }
-        public virtual DbSet<G3Lease> G3Lease { get; set; }
-        public virtual DbSet<G3MonthlyPaid> G3MonthlyPaid { get; set; }
-        public virtual DbSet<G3MonthlyPayment> G3MonthlyPayment { get; set; }
-        public virtual DbSet<G3Owner> G3Owner { get; set; }
-        public virtual DbSet<G3Property> G3Property { get; set; }
-        public virtual DbSet<G3Service> G3Service { get; set; }
-        public virtual DbSet<G3Tenant> G3Tenant { get; set; }
-        public virtual DbSet<G3Unit> G3Unit { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 // TODO: To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=134.108.190.89;Initial Catalog=Infosys;Persist Security Info=True;User ID=wkb6;Password=wkb6");
+                optionsBuilder.UseSqlServer("Data Source=134.108.190.89;Initial Catalog=Infosys;Persist Security Info=True;User ID=wkb6;Password=wkb6", sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: null);
+                    });
             }
         }
 

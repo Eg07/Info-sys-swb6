@@ -10,8 +10,8 @@ namespace PropertyManagement.DataContainers
         private bool _isSelected;
         public double MonthlyRent { get; set; }
         public string TenantNames { get; set; }
-        // TODO: maybe implement IsSelected as Interface
 
+        // TODO: maybe implement IsSelected as Interface
         public bool IsSelected
         {
             get => _isSelected;
