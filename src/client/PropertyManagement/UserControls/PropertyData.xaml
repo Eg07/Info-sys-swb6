@@ -59,7 +59,7 @@
                         </Button.BorderBrush>
                         Update
                     </Button>
-                    <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Delete this property">
+                    <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Delete this property" Command="{Binding DeleteCommand}">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource RedPrimary500}" />
                         </Button.Background>

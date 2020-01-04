@@ -16,12 +16,15 @@ namespace PropertyManagement.Domain.ViewModels
         public ObservableCollection<UnitDisplayContainer> PropertyUnits { get; set; }
 
         public ICommand UpdateCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
+
         public static InfosysContext InfoSysDbContext;
 
 
         public PropertyDataViewModel()
         {
             UpdateCommand = new CommandImplementation(o => UpdateDatabaseData());
+            DeleteCommand = new CommandImplementation(o => DeleteDatabaseEntry());
 
             PopulateDynamicData();
         }
@@ -29,6 +32,12 @@ namespace PropertyManagement.Domain.ViewModels
         public void UpdateDatabaseData()
         {
             InfoSysDbContext.G3Property.Update(Property);
+            InfoSysDbContext.SaveChangesAsync();
+        }
+
+        public void DeleteDatabaseEntry()
+        {
+            InfoSysDbContext.G3Property.Remove(Property);
             InfoSysDbContext.SaveChangesAsync();
         }
 
