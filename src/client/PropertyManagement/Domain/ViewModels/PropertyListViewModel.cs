@@ -1,14 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using PropertyManagement.Database;
 using PropertyManagement.Database.DataModels;
 
 namespace PropertyManagement.Domain.ViewModels
 {
     public class PropertyListViewModel : ViewModelBase
     {
-        public static InfosysContext InfoSysDbContext;
         public ObservableCollection<G3Property> Properties { get; set; }
 
         public PropertyListViewModel()

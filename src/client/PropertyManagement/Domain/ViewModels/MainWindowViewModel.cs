@@ -70,19 +70,9 @@ namespace PropertyManagement.Domain.ViewModels
         /// <param name="snackbarMessageQueue"></param>
         public MainWindowViewModel(ISnackbarMessageQueue snackbarMessageQueue)
         {
-            if (snackbarMessageQueue == null) throw new ArgumentNullException(nameof(snackbarMessageQueue));
-
-            // TODO: move to own method
-            // try to establish connection with database
-            DbContext = new InfosysContext();
-            snackbarMessageQueue.Enqueue("✔️ Database connection successfully established");
-            //DbContext.Database.EnsureCreated();
-
-
-            // TODO: assign on base
-            // assign DbContext to ViewModels
-            PropertyDataViewModel.InfoSysDbContext = DbContext;
-            PropertyListViewModel.InfoSysDbContext = DbContext;
+            Snackbar = snackbarMessageQueue ?? throw new ArgumentNullException(nameof(snackbarMessageQueue));
+            InfoSysDbContext = new InfosysContext();
+            Snackbar.Enqueue("✔️ Database connection successfully established");
 
             // commands to switch views
             RegisterCommands();
@@ -121,6 +111,11 @@ namespace PropertyManagement.Domain.ViewModels
             LoadPropertyDataCommand = new CommandImplementation(o => DisplayPropertyData());
             LoadTenantManagementCommand = new CommandImplementation(o => DisplayTenantManagement());
             LoadTransactionsCommand = new CommandImplementation(o => DisplayTransactions());
+        }
+
+        private void PopulateViewModels()
+        {
+
         }
     }
 }

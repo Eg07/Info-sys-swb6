@@ -22,7 +22,7 @@ namespace PropertyManagement.Database
 
         public InfosysContext()
         {
-            DeleteSampleAddressDataSet(G3Address);
+            //DeleteSampleAddressDataSet(G3Address);
             //ResetIdentitySeed("G3_address");
         }
 

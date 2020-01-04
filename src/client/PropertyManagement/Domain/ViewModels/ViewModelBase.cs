@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using MaterialDesignThemes.Wpf;
+using PropertyManagement.Database;
 
 namespace PropertyManagement.Domain.ViewModels
 {
@@ -8,7 +10,13 @@ namespace PropertyManagement.Domain.ViewModels
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        protected static InfosysContext InfoSysDbContext;
+        protected static ISnackbarMessageQueue Snackbar;
         public event PropertyChangedEventHandler PropertyChanged;
+        
+        protected ViewModelBase()
+        {
+        }
 
         protected void OnPropertyChanged(string propertyName)
         {
