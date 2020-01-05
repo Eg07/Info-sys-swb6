@@ -22,13 +22,41 @@ namespace PropertyManagement.Database
 
         public InfosysContext()
         {
-            //DeleteSampleAddressDataSet(G3Address);
-            //ResetIdentitySeed("G3_address");
         }
 
         public InfosysContext(DbContextOptions<InfosysContext> options)
             : base(options)
         {
+        }
+
+        public bool UpdateDatabaseEntry<T>(T entity) where T : class
+        {
+            try
+            {
+                Update(entity);
+                SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public bool DeleteDatabaseEntry<T>(T entity) where T : class
+        {
+            try
+            {
+                Remove(entity);
+                SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return false;
+            }
         }
 
         /// <summary>
@@ -148,6 +176,20 @@ namespace PropertyManagement.Database
             };
 
             G3Lease.Add(leaseExample1);
+            SaveChanges();
+        }
+
+        public void CreateSampleBankAccountDataSet()
+        {
+            var bankAccountExample = new G3BankAccount()
+            {
+                Iban = "DE86500105179371442478",
+                TenantId = 1,
+                G3MonthlyPaid = null,
+                Tenant = null
+            };
+
+            G3BankAccount.Add(bankAccountExample);
             SaveChanges();
         }
 
