@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using PropertyManagement.Database.DataModels;
 using PropertyManagement.Domain.ViewModels;
 
