@@ -29,31 +29,14 @@ namespace PropertyManagement.Domain.ViewModels
 
         private void UpdateDatabaseData()
         {
-            try
-            {
-                InfoSysDbContext.G3Property.Update(Property);
-                InfoSysDbContext.SaveChanges();
-                Snackbar.Enqueue("Property data successfully updated");
-            }
-            catch (Exception e)
-            {
-                Snackbar.Enqueue("Update operation failed.");
-                Debug.WriteLine(e);
-            }
+            var status = InfoSysDbContext.UpdateDatabaseEntry(Property);
+            Snackbar.Enqueue(status ? "Property data successfully updated" : "Update operation failed");
         }
 
         private void DeleteDatabaseEntry()
         {
-            try
-            {
-                InfoSysDbContext.Remove(Property);
-                InfoSysDbContext.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Snackbar.Enqueue("Delete operation failed.");
-                Debug.WriteLine(e);
-            }
+            var status = InfoSysDbContext.DeleteDatabaseEntry(Property);
+            Snackbar.Enqueue(status ? "Property data successfully deleted" : "Delete operation failed");
         }
 
         private void PopulateDynamicData()

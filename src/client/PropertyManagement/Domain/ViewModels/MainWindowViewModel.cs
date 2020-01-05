@@ -14,11 +14,6 @@ namespace PropertyManagement.Domain.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         /// <summary>
-        /// The database context for accessing persisted data.
-        /// </summary>
-        public readonly InfosysContext DbContext;
-
-        /// <summary>
         /// The menu items in the navigation drawer
         /// </summary>
         public NavigationMenuItem[] MenuItems { get; set; }
@@ -51,18 +46,18 @@ namespace PropertyManagement.Domain.ViewModels
         public ICommand LoadTransactionsCommand { get; private set; }
 
         // view model change bound to methods
-        public void DisplayHome() => CurrentViewModel = (HomeViewModel)_userControls.Values.OfType<Home>().First().DataContext;
-        public void DisplayTenantManagement() => CurrentViewModel = (TenantManagementViewModel)_userControls.Values.OfType<TenantManagement>().First().DataContext;
-        public void DisplayPropertyList() => CurrentViewModel = (PropertyListViewModel)_userControls.Values.OfType<PropertyList>().First().DataContext;
-        public void DisplayPropertyData() => CurrentViewModel = (PropertyDataViewModel)_userControls.Values.OfType<PropertyData>().First().DataContext;
-        public void DisplayTransactions() => CurrentViewModel = (TransactionsViewModel)_userControls.Values.OfType<Transactions>().First().DataContext;
+        public void DisplayHome() => CurrentViewModel = (HomeViewModel)_userControls.Values.First(tuple => tuple.Item2 is Home).Item2.DataContext;
+        public void DisplayTenantManagement() => CurrentViewModel = (TenantManagementViewModel)_userControls.Values.First(tuple => tuple.Item2 is TenantManagement).Item2.DataContext;
+        public void DisplayPropertyList() => CurrentViewModel = (PropertyListViewModel)_userControls.Values.First(tuple => tuple.Item2 is PropertyList).Item2.DataContext;
+        public void DisplayPropertyData() => CurrentViewModel = (PropertyDataViewModel)_userControls.Values.First(tuple => tuple.Item2 is PropertyData).Item2.DataContext;
+        public void DisplayTransactions() => CurrentViewModel = (TransactionsViewModel)_userControls.Values.First(tuple => tuple.Item2 is Transactions).Item2.DataContext;
 
         #endregion
         
         /// <summary>
         /// Complete set of our user views
         /// </summary>
-        private readonly SortedDictionary<string, UserControl> _userControls = new SortedDictionary<string, UserControl>();
+        private readonly SortedDictionary<int, (string, UserControl)> _userControls = new SortedDictionary<int, (string, UserControl)>();
 
         /// <summary>
         /// Default Constructor for the Main View Model
@@ -73,6 +68,7 @@ namespace PropertyManagement.Domain.ViewModels
             Snackbar = snackbarMessageQueue ?? throw new ArgumentNullException(nameof(snackbarMessageQueue));
             InfoSysDbContext = new InfosysContext();
             Snackbar.Enqueue("✔️ Database connection successfully established");
+            
 
             // commands to switch views
             RegisterCommands();
@@ -84,18 +80,19 @@ namespace PropertyManagement.Domain.ViewModels
 
         private void GenerateNavigationDrawer()
         {
-            _userControls.Add("Home", new Home());
-            _userControls.Add("Tenant Management", new TenantManagement());
-            _userControls.Add("Managed Properties", new PropertyList());
-            _userControls.Add("Transactions", new Transactions());
+            // arguments: Order, Name, Content
+            _userControls.Add(1 ,("Home", new Home()));
+            _userControls.Add(2, ("Tenant Management", new TenantManagement()));
+            _userControls.Add(3, ("Property Data", new PropertyList()));
+            _userControls.Add(4, ("Transactions", new Transactions()));
             MenuItems = new NavigationMenuItem[_userControls.Count];
             
             // add the UserControls to the navigation drawer
             for (var i = 0; i < _userControls.Count; i++)
-                MenuItems[i] = new NavigationMenuItem(_userControls.Keys.ElementAt(i), _userControls.Values.ElementAt(i));
+                MenuItems[i] = new NavigationMenuItem(_userControls.Values.ElementAt(i).Item1, _userControls.Values.ElementAt(i).Item2);
 
             // add controls not shown in drawer
-            _userControls.Add("PropertyData", new PropertyData());
+            _userControls.Add(5, ("PropertyData", new PropertyData()));
 
             // assign related data
             PropertyList.NavigationContext = this;
@@ -111,11 +108,6 @@ namespace PropertyManagement.Domain.ViewModels
             LoadPropertyDataCommand = new CommandImplementation(o => DisplayPropertyData());
             LoadTenantManagementCommand = new CommandImplementation(o => DisplayTenantManagement());
             LoadTransactionsCommand = new CommandImplementation(o => DisplayTransactions());
-        }
-
-        private void PopulateViewModels()
-        {
-
         }
     }
 }

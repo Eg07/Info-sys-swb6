@@ -10,6 +10,9 @@ namespace PropertyManagement.Domain.ViewModels
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        /// <summary>
+        /// The database context for accessing persisted data.
+        /// </summary>
         protected static InfosysContext InfoSysDbContext;
         protected static ISnackbarMessageQueue Snackbar;
         public event PropertyChangedEventHandler PropertyChanged;

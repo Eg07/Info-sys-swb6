@@ -7,20 +7,8 @@ namespace PropertyManagement.DataContainers
 {
     public class UnitDisplayContainer : G3Unit
     {
-        private bool _isSelected;
         public double MonthlyRent { get; set; }
         public string TenantNames { get; set; }
-
-        // TODO: maybe implement IsSelected as Interface
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set
-            {
-                _isSelected = value;
-                Console.WriteLine(_isSelected);
-            }
-        }
 
         public UnitDisplayContainer(G3Unit unit) : base(unit)
         {
