@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using PropertyManagement.Database.DataModels;
 
@@ -6,6 +7,13 @@ namespace PropertyManagement.DataContainers
 {
     public class TenantDisplayContainer : G3Tenant
     {
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set => _isSelected = value;
+        }
+
         public string Iban { get; set; }
         public G3Address Address { get; set; }
 
