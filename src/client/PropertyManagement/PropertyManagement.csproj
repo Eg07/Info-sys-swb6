@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <None Remove="property.ico" />
-    <None Remove="Resources\Logo.png" />
-    <None Remove="Resources\property.ico" />
+    <None Remove="resources\house1.jpg" />
+    <None Remove="resources\Logo.png" />
+    <None Remove="resources\property.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\property.ico">
+    <Resource Include="resources\house1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\property.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -21,12 +25,22 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Domain\UiElements\MessageDialog.xaml.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\HelperQueries\" />
   </ItemGroup>
 
 </Project>

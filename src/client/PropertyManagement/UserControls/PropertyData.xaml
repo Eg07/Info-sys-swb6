@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="PropertyManagement.UserControls.PropertyData"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1180">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Red.Named.Primary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <materialDesign:Card UniformCornerRadius="20" Width="500" Height="300">
+                    <Border >
+                        <Border.Background>
+                            <ImageBrush Stretch="Fill" ImageSource="../resources/house1.jpg"/>
+                        </Border.Background>
+                    </Border>
+                </materialDesign:Card>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBox materialDesign:HintAssist.Hint="Street" Text="{Binding Path=Property.Adress.Street}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" />
+                    <TextBox materialDesign:HintAssist.Hint="House number" Text="{Binding Path=Property.Adress.HouseNr}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" />
+                    <TextBox materialDesign:HintAssist.Hint="City" Text="{Binding Path=Property.Adress.City}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
+                    <TextBox materialDesign:HintAssist.Hint="Zip code" Text="{Binding Path=Property.Adress.Zip}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
+                    <TextBox materialDesign:HintAssist.Hint="State" Text="{Binding Path=Property.Adress.State}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0 10 0 0" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Update Property Details" Command="{Binding UpdateCommand}">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource GreenPrimary500}" />
+                        </Button.Background>
+                        <Button.BorderBrush>
+                            <SolidColorBrush Color="{StaticResource GreenPrimary500}" />
+                        </Button.BorderBrush>
+                        Update
+                    </Button>
+                    <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Delete this property" Command="{Binding DeleteCommand}">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource RedPrimary500}" />
+                        </Button.Background>
+                        <Button.BorderBrush>
+                            <SolidColorBrush Color="{StaticResource RedPrimary500}" />
+                        </Button.BorderBrush>
+                        Delete
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <!-- Unit table -->
+        <Grid Grid.Row="2" Margin="15">
+            <DataGrid Margin="0 8 0 0" ItemsSource="{Binding PropertyUnits}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+              materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn Binding="{Binding Id}" Header="Id" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" IsReadOnly="True"/>
+                    <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+                    <materialDesign:DataGridTextColumn Binding="{Binding RoomsNr}" Header="Number of rooms" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
+                    <!-- set a max length to get an indicator in the editor -->
+                    <materialDesign:DataGridTextColumn Binding="{Binding Area}" Header="Living space (m²)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding MonthlyRent}" Header="Monthly rent ($)" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                    <materialDesign:DataGridTextColumn Binding="{Binding TenantNames}" Header="Tenants" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

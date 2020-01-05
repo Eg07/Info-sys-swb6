@@ -1,0 +1,1 @@
+DBCC CHECKIDENT ('[dbo].[G3_address]', RESEED, 0);

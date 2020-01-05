@@ -1,8 +1,9 @@
-﻿<UserControl x:Class="PropertyManagement.Home"
+﻿<UserControl x:Class="PropertyManagement.UserControls.Home"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PropertyManagement"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     mc:Ignorable="d" 
     d:DesignHeight="1200" d:DesignWidth="300">
@@ -30,10 +31,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
                 <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap">What do you want to do today?</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Height="auto"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Left}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Binoculars" Height="24" Width="24" Margin="0 5 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="8 5 0 0"><Run Text="EXPLORE"/></TextBlock>
@@ -47,32 +45,22 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Height="auto"
-                        Width="auto"
-                        Padding="10"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}">
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Width="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadTenantManagementCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="PersonOutline" Height="48" Width="48" Margin="0 6 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Margin="8 0 0 0">Tenant Management</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Height="auto"
-                        Padding="10"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}">
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadPropertyListCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="HouseCityOutline" Height="48" Width="48" Margin="0 8 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Margin="16 0 0 0">Property Data</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Height="auto"
-                        Padding="10"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}">
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="auto" Padding="10" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataContext.LoadTransactionsCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ImportExport" Height="48" Width="48" Margin="0 10 0 0" />
                         <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Margin="8 0 0 0">Transactions</TextBlock>

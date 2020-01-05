@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:domain="clr-namespace:PropertyManagement.Domain"
+        xmlns:viewModels="clr-namespace:PropertyManagement.Domain.ViewModels"
         mc:Ignorable="d"
         Title="Property Management" Height="720" Width="1180"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:userControls="clr-namespace:PropertyManagement.UserControls"
+        xmlns:uiElements="clr-namespace:PropertyManagement.Domain.UiElements"
+        xmlns:dataContainers="clr-namespace:PropertyManagement.DataContainers"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -23,7 +25,22 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                <userControls:Home />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PropertyListViewModel}">
+                <userControls:PropertyList />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PropertyDataViewModel}">
+                <userControls:PropertyData />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:TenantManagementViewModel}">
+                <userControls:TenantManagement />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:TransactionsViewModel}">
+                <userControls:Transactions />
+            </DataTemplate>
+        </ResourceDictionary>        
     </Window.Resources>
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
@@ -33,15 +50,15 @@
                                     DockPanel.Dock="Top"
                                     HorizontalAlignment="Right" Margin="16"
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
-                    <ListBox x:Name="MenuItemsListBox" Margin="0 16 0 16" SelectedIndex="0"
+                    <ListBox Margin="0 16 0 16" SelectedIndex="0"
                              ItemsSource="{Binding MenuItems}"
                              PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp">
                         <ListBox.Resources>
                             <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="domain:MenuItem">
-                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
+                            <DataTemplate DataType="dataContainers:NavigationMenuItem">
+                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -61,12 +78,9 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <domain:PaletteSelector Grid.Column="0" Margin="0 0 35 0"></domain:PaletteSelector>
+                                <uiElements:PaletteSelector Grid.Column="0" Margin="0 0 35 0"></uiElements:PaletteSelector>
                                 <materialDesign:PopupBox Grid.Column="1" DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                                     <StackPanel>
-                                        <Button Content="Item1" Click="MenuPopupButton_OnClick"/>
-                                        <Button Content="Can't Touch This" IsEnabled="False" />
-                                        <Separator/>
                                         <Button Content="Exit" Click="MenuPopupButton_OnClick"/>
                                     </StackPanel>
                                 </materialDesign:PopupBox>
@@ -80,11 +94,10 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ScrollViewer Grid.Row="1" 
-                                  HorizontalScrollBarVisibility="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.HorizontalScrollBarVisibilityRequirement}"
-                                  VerticalScrollBarVisibility="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.VerticalScrollBarVisibilityRequirement}" 
-                                  Padding="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.MarginRequirement}">
-                        <ContentControl Content="{Binding ElementName=MenuItemsListBox, Path=SelectedItem.Content}" />
+                    <ScrollViewer Grid.Row="1">
+                        <!-- Main content area -->
+                        <ContentControl Content="{Binding Path=CurrentViewModel}" />
+                        <!-- Main content area -->
                     </ScrollViewer>
                     <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar" Grid.Row="1" />
                 </Grid>
