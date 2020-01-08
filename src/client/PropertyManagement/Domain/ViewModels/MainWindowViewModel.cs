@@ -69,7 +69,6 @@ namespace PropertyManagement.Domain.ViewModels
             InfoSysDbContext = new InfosysContext();
             Snackbar.Enqueue("✔️ Database connection successfully established");
             
-
             // commands to switch views
             RegisterCommands();
             // generate main navigation drawer visible on every view
