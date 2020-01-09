@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database.DataModels;
 
@@ -53,6 +54,171 @@ namespace PropertyManagement.Database
             {
                 Debug.WriteLine(e);
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Resetes the identity seed of a table.
+        /// </summary>
+        /// <param name="tableName">The name of the table.</param>
+        /// <param name="seed">The value to reset the seed to.</param>
+        public void ResetIdentitySeed(string tableName, int seed = 0)
+        {
+            Database.ExecuteSqlInterpolated($"DBCC CHECKIDENT ('[dbo].[{tableName}]', RESEED, {seed})");
+        }
+
+        /// <summary>
+        /// Creates some sample data for address table
+        /// </summary>
+        private void CreateSampleAddressDataSet()
+        {
+            // references should be added later
+            var addressExample1 = new G3Address
+            {
+                City = "Stuttgart",
+                HouseNr = 6,
+                State = "Baden-Württemberg",
+                Street = "Königsstraße",
+                Zip = 70173,
+                G3Property = null,
+                G3Owner = null
+            };
+            var addressExample2 = new G3Address
+            {
+                City = "Esslingen",
+                HouseNr = 2,
+                State = "Baden-Württemberg",
+                Street = "Bahnhofstraße",
+                Zip = 73733,
+                G3Property = null,
+                G3Owner = null
+            };
+            // Add address
+            G3Address.Add(addressExample1);
+            G3Address.Add(addressExample2);
+            SaveChanges();
+        }
+
+        private void CreateSampleOwnerDataSet()
+        {
+            var ownerExample1 = new G3Owner()
+            {
+                Adressid = 1,
+                FirstName = "Kimora",
+                LastName = "Bain",
+                G3Property = null
+            };
+
+            G3Owner.Add(ownerExample1);
+            SaveChanges();
+        }
+
+        private void CreateSamplePropertyDataSet()
+        {
+            var propertyExample1 = new G3Property()
+            {
+                AdressId = 2,
+                OwnerId = 1,
+                Adress = null,
+                G3OperatingCosts = null,
+                G3Unit = null,
+                Owner = null
+            };
+
+            G3Property.Add(propertyExample1);
+            SaveChanges();
+        }
+
+        /// <summary>
+        /// Creates some sample data for unit table
+        /// </summary>
+        private void CreateSampleUnitDataSet()
+        {
+            var unitExample1 = new G3Unit()
+            {
+                RoomsNr = 3,
+                Area = 51.7,
+                Floor = 1,
+                ResidentNr = 1,
+                PropertyId = 1,
+                G3Lease = null,
+                G3OperatingCosts = null,
+                Property = null
+            };
+
+            G3Unit.Add(unitExample1);
+            SaveChanges();
+        }
+
+        private void CreateSampleTenantDataSet()
+        {
+            var tenantExample1 = new G3Tenant()
+            {
+                FirstName = "Vanesa",
+                LastName = "Ramsay"
+            };
+
+            G3Tenant.Add(tenantExample1);
+            SaveChanges();
+        }
+
+        private void CreateBankAccountDataSet()
+        {
+            var bankAccount = new G3BankAccount()
+            {
+                G3Payments = null,
+                Tenant = null,
+                Iban = "DE12500105170648489890",
+                TenantId = 2
+            };
+
+            G3BankAccount.Add(bankAccount);
+            SaveChanges();
+        }
+
+        private void CreateLeaseDataSet()
+        {
+            var leaseExample1 = new G3Lease()
+            {
+                Cost = 1300,
+                EndDate = DateTime.Today.AddYears(10),
+                StartDate = DateTime.Today,
+                UnitId = 2,
+                TenantId = 2
+            };
+
+            G3Lease.Add(leaseExample1);
+            SaveChanges();
+        }
+
+        public void CreateSampleBankAccountDataSet()
+        {
+            var bankAccountExample = new G3BankAccount()
+            {
+                Iban = "DE86500105179371442478",
+                TenantId = 1,
+                G3Payments = null,
+                Tenant = null
+            };
+
+            G3BankAccount.Add(bankAccountExample);
+            SaveChanges();
+        }
+
+        /// <summary>
+        /// Remove all addresses from the table
+        /// </summary>
+        public void DeleteSampleAddressDataSet<T>(DbSet<T> set) where T : class
+        {
+            try
+            {
+                set.ToList().ForEach(entry => set.Remove(entry));
+                SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                // TODO: if used by front end print out error message (snackbar)
+                Debug.WriteLine(e);
             }
         }
 
