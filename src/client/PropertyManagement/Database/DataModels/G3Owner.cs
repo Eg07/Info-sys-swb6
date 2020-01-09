@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-// ReSharper disable All
 namespace PropertyManagement.Database.DataModels
 {
-    public class G3Owner
+    public partial class G3Owner
     {
         public G3Owner()
         {

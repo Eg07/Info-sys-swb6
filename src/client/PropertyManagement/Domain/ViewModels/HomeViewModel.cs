@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Input;
-using LinqToExcel;
 using Microsoft.Win32;
 
 namespace PropertyManagement.Domain.ViewModels
@@ -31,6 +30,7 @@ namespace PropertyManagement.Domain.ViewModels
             switch (Path.GetExtension(filePath))
             {
                 case ".csv":
+                    ImportCsvData(filePath);
                     break;
                 case ".xls":
                     ImportsXlsData(filePath);
@@ -40,9 +40,16 @@ namespace PropertyManagement.Domain.ViewModels
             }
         }
 
+        private void ImportCsvData(string filePath)
+        {
+            throw new NotImplementedException();
+        }
+
         private void ImportsXlsData(string filePath)
         {
-            var file = new ExcelQueryFactory(filePath);
+            throw new NotImplementedException();
         }
+
+
     }
 }

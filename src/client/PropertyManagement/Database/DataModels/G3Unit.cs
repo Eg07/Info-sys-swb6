@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 
-// ReSharper disable All
 namespace PropertyManagement.Database.DataModels
 {
-    public class G3Unit
+    public partial class G3Unit
     {
         public G3Unit()
         {
             G3Lease = new HashSet<G3Lease>();
-            G3Service = new HashSet<G3Service>();
+            G3OperatingCosts = new HashSet<G3OperatingCosts>();
         }
 
         public G3Unit(G3Unit unit)
@@ -21,7 +20,7 @@ namespace PropertyManagement.Database.DataModels
 
             Property = unit.Property;
             G3Lease = unit.G3Lease;
-            G3Service = unit.G3Service;
+            G3OperatingCosts = unit.G3OperatingCosts;
         }
 
         public int Id { get; set; }
@@ -33,6 +32,6 @@ namespace PropertyManagement.Database.DataModels
 
         public virtual G3Property Property { get; set; }
         public virtual ICollection<G3Lease> G3Lease { get; set; }
-        public virtual ICollection<G3Service> G3Service { get; set; }
+        public virtual ICollection<G3OperatingCosts> G3OperatingCosts { get; set; }
     }
 }
