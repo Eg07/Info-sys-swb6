@@ -1,8 +1,9 @@
 ﻿using System;
 
+// ReSharper disable VirtualMemberCallInConstructor
 namespace PropertyManagement.Database.DataModels
 {
-    public partial class G3OperatingCosts
+    public class G3OperatingCosts
     {
         public int Id { get; set; }
         public string Description { get; set; }

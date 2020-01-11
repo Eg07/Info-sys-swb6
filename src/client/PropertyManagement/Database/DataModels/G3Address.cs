@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 
+// ReSharper disable VirtualMemberCallInConstructor
 namespace PropertyManagement.Database.DataModels
 {
-    public partial class G3Address
+    public class G3Address
     {
         public G3Address()
         {

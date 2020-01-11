@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.Database.DataModels;
 
+// ReSharper disable UnusedMember.Local
 namespace PropertyManagement.Database
 {
-    public partial class InfosysContext : DbContext
+    public class InfosysContext : DbContext
     {
         public virtual DbSet<G3Address> G3Address { get; set; }
         public virtual DbSet<G3BankAccount> G3BankAccount { get; set; }
@@ -70,20 +72,20 @@ namespace PropertyManagement.Database
         /// <summary>
         /// Creates some sample data for address table
         /// </summary>
-        private void CreateSampleAddressDataSet()
+        private void CreateAddressData()
         {
             // references should be added later
-            var addressExample1 = new DataModels.G3Address
+            var addressExample1 = new G3Address
             {
-                City = "Stuttgart",
-                HouseNr = 6,
+                City = "Esslingen",
+                HouseNr = 101,
                 State = "Baden-Württemberg",
-                Street = "Königsstraße",
-                Zip = 70173,
+                Street = "Flandernstraße",
+                Zip = 73728,
                 G3Property = null,
                 G3Owner = null
             };
-            var addressExample2 = new DataModels.G3Address
+            var addressExample2 = new G3Address
             {
                 City = "Esslingen",
                 HouseNr = 2,
@@ -99,13 +101,13 @@ namespace PropertyManagement.Database
             SaveChanges();
         }
 
-        private void CreateSampleOwnerDataSet()
+        private void CreateOwnerData()
         {
-            var ownerExample1 = new DataModels.G3Owner()
+            var ownerExample1 = new G3Owner()
             {
                 Adressid = 1,
-                FirstName = "Kimora",
-                LastName = "Bain",
+                FirstName = "Dream",
+                LastName = "House",
                 G3Property = null
             };
 
@@ -113,9 +115,9 @@ namespace PropertyManagement.Database
             SaveChanges();
         }
 
-        private void CreateSamplePropertyDataSet()
+        private void CreatePropertyData()
         {
-            var propertyExample1 = new DataModels.G3Property()
+            var propertyExample1 = new G3Property()
             {
                 AdressId = 2,
                 OwnerId = 1,
@@ -132,53 +134,260 @@ namespace PropertyManagement.Database
         /// <summary>
         /// Creates some sample data for unit table
         /// </summary>
-        private void CreateSampleUnitDataSet()
+        private void CreateUnitData()
         {
-            var unitExample1 = new DataModels.G3Unit()
+            var units = new List<G3Unit>
             {
-                RoomsNr = 3,
-                Area = 51.7,
-                Floor = 1,
-                ResidentNr = 1,
-                PropertyId = 1,
-                G3Lease = null,
-                G3OperatingCosts = null,
-                Property = null
+                new G3Unit()
+                {
+                    RoomsNr = 3,
+                    Area = 62.7,
+                    Floor = 0,
+                    ResidentNr = 4,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 4,
+                    Area = 51.2,
+                    Floor = 0,
+                    ResidentNr = 2,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 4,
+                    Area = 61.8,
+                    Floor = 1,
+                    ResidentNr = 5,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 2,
+                    Area = 51.7,
+                    Floor = 1,
+                    ResidentNr = 1,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 5,
+                    Area = 91.2,
+                    Floor = 2,
+                    ResidentNr = 2,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 3,
+                    Area = 49.9,
+                    Floor = 2,
+                    ResidentNr = 3,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 3,
+                    Area = 53.8,
+                    Floor = 3,
+                    ResidentNr = 1,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 4,
+                    Area = 55.4,
+                    Floor = 3,
+                    ResidentNr = 2,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 4,
+                    Area = 82.6,
+                    Floor = 4,
+                    ResidentNr = 4,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 5,
+                    Area = 53.5,
+                    Floor = 4,
+                    ResidentNr = 2,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                },
+                new G3Unit()
+                {
+                    RoomsNr = 2,
+                    Area = 56.7,
+                    Floor = 5,
+                    ResidentNr = 1,
+                    PropertyId = 1,
+                    G3Lease = null,
+                    G3OperatingCosts = null,
+                    Property = null
+                }
             };
 
-            G3Unit.Add(unitExample1);
+            G3Unit.AddRange(units);
             SaveChanges();
         }
 
-        private void CreateSampleTenantDataSet()
+        private void CreateTenantData()
         {
-            var tenantExample1 = new DataModels.G3Tenant()
+            var tenants = new List<G3BankAccount>
             {
-                FirstName = "Vanesa",
-                LastName = "Ramsay"
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Bella",
+                        LastName = "Huber"
+                    },
+                    Iban = "DE20500105179486279347"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Naomi",
+                        LastName = "Mayer"
+                    },
+                    Iban = "DE08500105177413815781"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Fabian",
+                        LastName = "Müller"
+                    },
+                    Iban = "DE20500105179486279347"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Franziska",
+                        LastName = "Häfele"
+                    },
+                    Iban = "DE60500105178948554471"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Olaf",
+                        LastName = "Haug"
+                    },
+                    Iban = "DE60500105177453325176"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Brenda",
+                        LastName = "Barni"
+                    },
+                    Iban = "DE14500105171982429198"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Ali",
+                        LastName = "Strobel"
+                    },
+                    Iban = "DE78500105172496167788"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Todd",
+                        LastName = "Koslowski"
+                    },
+                    Iban = "DE04500105171615323857"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Aedan",
+                        LastName = "Mann"
+                    },
+                    Iban = "DE20500105174979224981"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Kaidan",
+                        LastName = "Riester"
+                    },
+                    Iban = "DE49500105174141644591"
+                },
+                new G3BankAccount()
+                {
+                    G3Payments = null,
+                    Tenant = new G3Tenant()
+                    {
+                        FirstName = "Ibraheem",
+                        LastName = "Stich"
+                    },
+                    Iban = "DE45500105172395899288"
+                }
             };
 
-            G3Tenant.Add(tenantExample1);
-            SaveChanges();
-        }
-
-        private void CreateBankAccountDataSet()
-        {
-            var bankAccount = new DataModels.G3BankAccount()
-            {
-                G3Payments = null,
-                Tenant = null,
-                Iban = "DE12500105170648489890",
-                TenantId = 2
-            };
-
-            G3BankAccount.Add(bankAccount);
+            AddRange(tenants);
             SaveChanges();
         }
 
         private void CreateLeaseDataSet()
         {
-            var leaseExample1 = new DataModels.G3Lease()
+            var leaseExample1 = new G3Lease()
             {
                 Cost = 1300,
                 EndDate = DateTime.Today.AddYears(10),
@@ -193,7 +402,7 @@ namespace PropertyManagement.Database
 
         public void CreateSampleBankAccountDataSet()
         {
-            var bankAccountExample = new DataModels.G3BankAccount()
+            var bankAccountExample = new G3BankAccount()
             {
                 Iban = "DE86500105179371442478",
                 TenantId = 1,
@@ -226,7 +435,6 @@ namespace PropertyManagement.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=134.108.190.89;Initial Catalog=Infosys;Persist Security Info=True;User ID=wkb6;Password=wkb6");
             }
         }
@@ -522,10 +730,6 @@ namespace PropertyManagement.Database
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_66");
             });
-
-            OnModelCreatingPartial(modelBuilder);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

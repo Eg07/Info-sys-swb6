@@ -90,7 +90,9 @@ namespace PropertyManagement.Domain.ViewModels
         private List<G3Payments> ExtractPaymentsFromTransactions(IEnumerable<(DateTime, DateTime, string, string, string, double, string)> transactions)
         {
             var payments = new List<G3Payments>();
-            transactions.Where(transaction => transaction.Item6 >= 0).ToList().ForEach(payment => payments.Add(new G3Payments()
+            var positiveTransaction = transactions.Where(transaction => transaction.Item6 >= 0).ToList();
+            // ReSharper disable once AccessToModifiedClosure
+            positiveTransaction.ForEach(payment => payments.Add(new G3Payments
             {
                 BookingDate = payment.Item1,
                 ValutaDate = payment.Item2,
@@ -108,6 +110,7 @@ namespace PropertyManagement.Domain.ViewModels
         private List<G3OperatingCosts> ExtractOperatingCostsFromTransactions(IEnumerable<(DateTime, DateTime, string, string, string, double, string)> transactions)
         {
             var operatingCosts = new List<G3OperatingCosts>();
+            // ReSharper disable once AccessToModifiedClosure
             transactions.Where(transaction => transaction.Item6 < 0).ToList().ForEach(cost => operatingCosts.Add(new G3OperatingCosts()
             {
                 BookingDate = cost.Item1,
@@ -184,6 +187,7 @@ namespace PropertyManagement.Domain.ViewModels
             return paymentList;
         }
 
+        // ReSharper disable once UnusedParameter.Local
         private void ImportsXlsData(string filePath)
         {
             throw new NotImplementedException();
