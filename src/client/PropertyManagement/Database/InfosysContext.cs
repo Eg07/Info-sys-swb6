@@ -73,7 +73,7 @@ namespace PropertyManagement.Database
         private void CreateSampleAddressDataSet()
         {
             // references should be added later
-            var addressExample1 = new G3Address
+            var addressExample1 = new DataModels.G3Address
             {
                 City = "Stuttgart",
                 HouseNr = 6,
@@ -83,7 +83,7 @@ namespace PropertyManagement.Database
                 G3Property = null,
                 G3Owner = null
             };
-            var addressExample2 = new G3Address
+            var addressExample2 = new DataModels.G3Address
             {
                 City = "Esslingen",
                 HouseNr = 2,
@@ -101,7 +101,7 @@ namespace PropertyManagement.Database
 
         private void CreateSampleOwnerDataSet()
         {
-            var ownerExample1 = new G3Owner()
+            var ownerExample1 = new DataModels.G3Owner()
             {
                 Adressid = 1,
                 FirstName = "Kimora",
@@ -115,7 +115,7 @@ namespace PropertyManagement.Database
 
         private void CreateSamplePropertyDataSet()
         {
-            var propertyExample1 = new G3Property()
+            var propertyExample1 = new DataModels.G3Property()
             {
                 AdressId = 2,
                 OwnerId = 1,
@@ -134,7 +134,7 @@ namespace PropertyManagement.Database
         /// </summary>
         private void CreateSampleUnitDataSet()
         {
-            var unitExample1 = new G3Unit()
+            var unitExample1 = new DataModels.G3Unit()
             {
                 RoomsNr = 3,
                 Area = 51.7,
@@ -152,7 +152,7 @@ namespace PropertyManagement.Database
 
         private void CreateSampleTenantDataSet()
         {
-            var tenantExample1 = new G3Tenant()
+            var tenantExample1 = new DataModels.G3Tenant()
             {
                 FirstName = "Vanesa",
                 LastName = "Ramsay"
@@ -164,7 +164,7 @@ namespace PropertyManagement.Database
 
         private void CreateBankAccountDataSet()
         {
-            var bankAccount = new G3BankAccount()
+            var bankAccount = new DataModels.G3BankAccount()
             {
                 G3Payments = null,
                 Tenant = null,
@@ -178,7 +178,7 @@ namespace PropertyManagement.Database
 
         private void CreateLeaseDataSet()
         {
-            var leaseExample1 = new G3Lease()
+            var leaseExample1 = new DataModels.G3Lease()
             {
                 Cost = 1300,
                 EndDate = DateTime.Today.AddYears(10),
@@ -193,7 +193,7 @@ namespace PropertyManagement.Database
 
         public void CreateSampleBankAccountDataSet()
         {
-            var bankAccountExample = new G3BankAccount()
+            var bankAccountExample = new DataModels.G3BankAccount()
             {
                 Iban = "DE86500105179371442478",
                 TenantId = 1,
@@ -226,6 +226,7 @@ namespace PropertyManagement.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=134.108.190.89;Initial Catalog=Infosys;Persist Security Info=True;User ID=wkb6;Password=wkb6");
             }
         }
@@ -327,6 +328,12 @@ namespace PropertyManagement.Database
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
 
+                entity.Property(e => e.Association)
+                    .IsRequired()
+                    .HasColumnName("association")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.BookingDate)
                     .HasColumnName("bookingDate")
                     .HasColumnType("datetime");
@@ -403,6 +410,12 @@ namespace PropertyManagement.Database
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
+
+                entity.Property(e => e.Association)
+                    .IsRequired()
+                    .HasColumnName("association")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.BookingDate)
                     .HasColumnName("bookingDate")

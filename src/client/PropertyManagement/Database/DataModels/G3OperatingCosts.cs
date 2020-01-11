@@ -6,6 +6,7 @@ namespace PropertyManagement.Database.DataModels
     {
         public int Id { get; set; }
         public string Description { get; set; }
+        public string Association { get; set; }
         public string Type { get; set; }
         public double Amount { get; set; }
         public DateTime BookingDate { get; set; }
