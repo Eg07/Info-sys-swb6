@@ -13,6 +13,7 @@ namespace PropertyManagement.Database.DataModels
 
         public G3Unit(G3Unit unit)
         {
+            Id = unit.Id;
             RoomsNr = unit.RoomsNr;
             Area = unit.Area;
             Floor = unit.Floor;

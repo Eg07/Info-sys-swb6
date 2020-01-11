@@ -69,6 +69,15 @@ namespace PropertyManagement.Database
             Database.ExecuteSqlInterpolated($"DBCC CHECKIDENT ('[dbo].[{tableName}]', RESEED, {seed})");
         }
 
+        private void CreateCompleteDataSet()
+        {
+            CreateAddressData();
+            CreateOwnerData();
+            CreatePropertyData();
+            CreateTenantData();
+            CreateLeaseData();
+        }
+
         /// <summary>
         /// Creates some sample data for address table
         /// </summary>
@@ -131,140 +140,6 @@ namespace PropertyManagement.Database
             SaveChanges();
         }
 
-        /// <summary>
-        /// Creates some sample data for unit table
-        /// </summary>
-        private void CreateUnitData()
-        {
-            var units = new List<G3Unit>
-            {
-                new G3Unit()
-                {
-                    RoomsNr = 3,
-                    Area = 62.7,
-                    Floor = 0,
-                    ResidentNr = 4,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 4,
-                    Area = 51.2,
-                    Floor = 0,
-                    ResidentNr = 2,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 4,
-                    Area = 61.8,
-                    Floor = 1,
-                    ResidentNr = 5,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 2,
-                    Area = 51.7,
-                    Floor = 1,
-                    ResidentNr = 1,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 5,
-                    Area = 91.2,
-                    Floor = 2,
-                    ResidentNr = 2,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 3,
-                    Area = 49.9,
-                    Floor = 2,
-                    ResidentNr = 3,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 3,
-                    Area = 53.8,
-                    Floor = 3,
-                    ResidentNr = 1,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 4,
-                    Area = 55.4,
-                    Floor = 3,
-                    ResidentNr = 2,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 4,
-                    Area = 82.6,
-                    Floor = 4,
-                    ResidentNr = 4,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 5,
-                    Area = 53.5,
-                    Floor = 4,
-                    ResidentNr = 2,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                },
-                new G3Unit()
-                {
-                    RoomsNr = 2,
-                    Area = 56.7,
-                    Floor = 5,
-                    ResidentNr = 1,
-                    PropertyId = 1,
-                    G3Lease = null,
-                    G3OperatingCosts = null,
-                    Property = null
-                }
-            };
-
-            G3Unit.AddRange(units);
-            SaveChanges();
-        }
-
         private void CreateTenantData()
         {
             var tenants = new List<G3BankAccount>
@@ -277,7 +152,7 @@ namespace PropertyManagement.Database
                         FirstName = "Bella",
                         LastName = "Huber"
                     },
-                    Iban = "DE20500105179486279347"
+                    Iban = "DE16500105174657255572"
                 },
                 new G3BankAccount()
                 {
@@ -385,32 +260,189 @@ namespace PropertyManagement.Database
             SaveChanges();
         }
 
-        private void CreateLeaseDataSet()
+        private void CreateLeaseData()
         {
-            var leaseExample1 = new G3Lease()
+            var leases = new List<G3Lease>
             {
-                Cost = 1300,
-                EndDate = DateTime.Today.AddYears(10),
-                StartDate = DateTime.Today,
-                UnitId = 2,
-                TenantId = 2
-            };
+                new G3Lease()
+                {
+                    Cost = 310,
+                    UtilitiesCost = 50,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2021, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Häfele"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 2,
+                        Area = 51.7,
+                        Floor = 1,
+                        ResidentNr = 1,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 350,
+                    UtilitiesCost = 62.50,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2022, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Haug"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 5,
+                        Area = 91.2,
+                        Floor = 2,
+                        ResidentNr = 2,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 400,
+                    UtilitiesCost = 88.30,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2024, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Koslowski"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 4,
+                        Area = 55.4,
+                        Floor = 3,
+                        ResidentNr = 2,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 200,
+                    UtilitiesCost = 30,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2022, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Barni"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 3,
+                        Area = 49.9,
+                        Floor = 2,
+                        ResidentNr = 3,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 300,
+                    UtilitiesCost = 50,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2023, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Mann"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 4,
+                        Area = 82.6,
+                        Floor = 4,
+                        ResidentNr = 4,
+                        PropertyId = 1
+                    },
+                },
+                new G3Lease()
+                {
+                    Cost = 330,
+                    UtilitiesCost = 40,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2021, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Riester"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 5,
+                        Area = 53.5,
+                        Floor = 4,
+                        ResidentNr = 2,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 340,
+                    UtilitiesCost = 40,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2024, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Stich"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 2,
+                        Area = 56.7,
+                        Floor = 5,
+                        ResidentNr = 1,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 400,
+                    UtilitiesCost = 80,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2022, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Mayer"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 4,
+                        Area = 51.2,
+                        Floor = 0,
+                        ResidentNr = 2,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 380,
+                    UtilitiesCost = 45,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2023, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Huber"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 4,
+                        Area = 51.2,
+                        Floor = 0,
+                        ResidentNr = 2,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 400,
+                    UtilitiesCost = 60,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2024, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Strobel"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 3,
+                        Area = 53.8,
+                        Floor = 3,
+                        ResidentNr = 1,
+                        PropertyId = 1
+                    }
+                },
+                new G3Lease()
+                {
+                    Cost = 350,
+                    UtilitiesCost = 40,
+                    StartDate = new DateTime(2019, 01, 01),
+                    EndDate = new DateTime(2021, 12, 31),
+                    Tenant = G3Tenant.First(tenant => tenant.LastName == "Müller"),
+                    Unit = new G3Unit()
+                    {
+                        RoomsNr = 3,
+                        Area = 62.7,
+                        Floor = 1,
+                        ResidentNr = 4,
+                        PropertyId = 1
+                    },
+                },
+        };
 
-            G3Lease.Add(leaseExample1);
-            SaveChanges();
-        }
-
-        public void CreateSampleBankAccountDataSet()
-        {
-            var bankAccountExample = new G3BankAccount()
-            {
-                Iban = "DE86500105179371442478",
-                TenantId = 1,
-                G3Payments = null,
-                Tenant = null
-            };
-
-            G3BankAccount.Add(bankAccountExample);
+            G3Lease.AddRange(leases);
             SaveChanges();
         }
 
