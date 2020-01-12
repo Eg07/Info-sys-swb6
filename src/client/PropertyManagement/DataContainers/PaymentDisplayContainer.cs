@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PropertyManagement.Database.DataModels;
 
 namespace PropertyManagement.DataContainers
 {
-    public class PaymentDisplayContainer
+    public class PaymentDisplayContainer : G3Payments
     {
+        public PaymentDisplayContainer(G3Payments payment) : base(payment)
+        {
 
+        }
     }
 }

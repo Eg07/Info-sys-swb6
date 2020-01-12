@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PropertyManagement.Database.DataModels;
 
 namespace PropertyManagement.DataContainers
 {
-    public class OperatingCostDisplayContainer
+    public class OperatingCostDisplayContainer : G3OperatingCosts
     {
+        public OperatingCostDisplayContainer(G3OperatingCosts operatingCost) : base(operatingCost)
+        {
+
+        }
     }
 }

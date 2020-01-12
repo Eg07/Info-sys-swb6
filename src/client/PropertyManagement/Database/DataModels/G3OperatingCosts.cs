@@ -18,5 +18,24 @@ namespace PropertyManagement.Database.DataModels
 
         public virtual G3Property Property { get; set; }
         public virtual G3Unit Unit { get; set; }
+
+        public G3OperatingCosts() { }
+
+        public G3OperatingCosts(G3OperatingCosts operatingCost)
+        {
+            Id = operatingCost.Id;
+            Description = operatingCost.Description;
+            Association = operatingCost.Association;
+            Type = operatingCost.Type;
+            Amount = operatingCost.Amount;
+            BookingDate = operatingCost.BookingDate;
+            ValutaDate = operatingCost.ValutaDate;
+            UnitId = operatingCost.UnitId;
+            DistributionKey = operatingCost.DistributionKey;
+            PropertyId = operatingCost.UnitId;
+            Property = operatingCost.Property;
+            Unit = operatingCost.Unit;
+        }
+
     }
 }
