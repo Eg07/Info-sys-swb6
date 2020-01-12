@@ -16,7 +16,7 @@ namespace PropertyManagement.Domain.ViewModels
     {
         public ICommand ImportTransactionsCommand { get; private set; }
 
-        private static readonly List<G3Tenant> TenantList = InfoSysDbContext.G3Tenant.Include(i => i.G3BankAccount).ToList();
+        private static readonly List<G3Tenant> TenantList = InfoSysDbContext.G3Tenant.Include(i => i.G3BankAccount).Include(i => i.G3Lease).ToList();
 
         // TODO: move to transactions
         private static int _totalResidents = InfoSysDbContext.G3Unit.Sum(unit => unit.ResidentNr);
@@ -59,11 +59,17 @@ namespace PropertyManagement.Domain.ViewModels
             var transactions = GenerateTransactionsFromCsv(filePath);
             if(transactions == null) return;
 
+            // prepare payments for insertion
             var payments = ExtractPaymentsFromTransactions(transactions);
             payments = ApplyStandingOrders(payments);
+            payments.Where(payment => payment.IbanNavigation == null).ToList().ForEach(payment => payment.Iban = null);
+
+            // prepare operatingCosts for insertion
             var operatingCosts = ExtractOperatingCostsFromTransactions(transactions);
-            
-            
+
+            InfoSysDbContext.G3Payments.AddRange(payments);
+            InfoSysDbContext.G3OperatingCosts.AddRange(operatingCosts);
+            InfoSysDbContext.SaveChanges();
         }
 
         private List<(DateTime, DateTime, string, string, string, double, string)> GenerateTransactionsFromCsv(string filePath)
@@ -173,8 +179,7 @@ namespace PropertyManagement.Domain.ViewModels
                 var matchedTenant = TenantList.FirstOrDefault(tenant => tenant.G3BankAccount.First().Iban == payment.Iban);
                 if (matchedTenant != null)
                 {
-                    payment.IbanNavigation = matchedTenant.G3BankAccount.First();
-                    payment.IbanNavigation.Tenant = matchedTenant;
+                    AssignAssociatedData(payment, matchedTenant);
                     continue;
                 }
                 // secondly try to match name in description or association
@@ -191,11 +196,17 @@ namespace PropertyManagement.Domain.ViewModels
                 );
 
                 if (matchedTenant == null) continue;
-                payment.IbanNavigation = matchedTenant.G3BankAccount.First();
-                payment.IbanNavigation.Tenant = matchedTenant;
+                AssignAssociatedData(payment, matchedTenant);
             }
 
             return paymentList;
+        }
+
+        private void AssignAssociatedData(G3Payments payment, G3Tenant matchedTenant)
+        {
+            payment.IbanNavigation = matchedTenant.G3BankAccount.First();
+            payment.IbanNavigation.Tenant = matchedTenant;
+            payment.LeaseId = matchedTenant.G3Lease.First().Id;
         }
 
         private List<G3Payments> ApplyStandingOrders(List<G3Payments> paymentList)

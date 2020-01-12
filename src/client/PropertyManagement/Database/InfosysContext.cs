@@ -603,13 +603,11 @@ namespace PropertyManagement.Database
                 entity.HasOne(d => d.Property)
                     .WithMany(p => p.G3OperatingCosts)
                     .HasForeignKey(d => d.PropertyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_142");
 
                 entity.HasOne(d => d.Unit)
                     .WithMany(p => p.G3OperatingCosts)
                     .HasForeignKey(d => d.UnitId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_134");
             });
 
@@ -668,7 +666,6 @@ namespace PropertyManagement.Database
                     .IsUnicode(false);
 
                 entity.Property(e => e.Iban)
-                    .IsRequired()
                     .HasColumnName("IBAN")
                     .HasMaxLength(22)
                     .IsUnicode(false);
@@ -688,13 +685,11 @@ namespace PropertyManagement.Database
                 entity.HasOne(d => d.IbanNavigation)
                     .WithMany(p => p.G3Payments)
                     .HasForeignKey(d => d.Iban)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_165");
 
                 entity.HasOne(d => d.Lease)
                     .WithMany(p => p.G3Payments)
                     .HasForeignKey(d => d.LeaseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_106");
             });
 

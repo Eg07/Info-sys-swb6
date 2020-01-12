@@ -12,7 +12,7 @@ namespace PropertyManagement.Database.DataModels
         public double Amount { get; set; }
         public DateTime BookingDate { get; set; }
         public DateTime ValutaDate { get; set; }
-        public int LeaseId { get; set; }
+        public int? LeaseId { get; set; }
         public string Iban { get; set; }
 
         public virtual G3BankAccount IbanNavigation { get; set; }
