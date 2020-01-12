@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -59,6 +60,7 @@ namespace PropertyManagement.Domain.ViewModels
             if(transactions == null) return;
 
             var payments = ExtractPaymentsFromTransactions(transactions);
+            payments = ApplyStandingOrders(payments);
             var operatingCosts = ExtractOperatingCostsFromTransactions(transactions);
             
             
@@ -141,15 +143,19 @@ namespace PropertyManagement.Domain.ViewModels
             };
 
             operatingCostsList.ForEach(transaction =>
+            {
+                foreach (var word in distributeOnResidents)
                 {
-                    distributeOnResidents.ForEach(word =>
-                    {
 
-                        if (transaction.Description.ToLower().ReplaceUmlauts().Contains(word))
-                            transaction.DistributionKey = (int) DistributionKey.DistributeByResidents;
-                        else transaction.DistributionKey = (int) DistributionKey.DistributeByArea;
-                    });
-                });
+                    if (transaction.Description.ToLower().ReplaceUmlauts().Contains(word))
+                    {
+                        transaction.DistributionKey = (int)DistributionKey.DistributeByResidents;
+                        break;
+                    }
+
+                    transaction.DistributionKey = (int) DistributionKey.DistributeByArea;
+                }
+            });
 
             return operatingCostsList;
         }
@@ -165,7 +171,12 @@ namespace PropertyManagement.Domain.ViewModels
             {
                 // first try to match IBANs
                 var matchedTenant = TenantList.FirstOrDefault(tenant => tenant.G3BankAccount.First().Iban == payment.Iban);
-                if (matchedTenant != null) break;
+                if (matchedTenant != null)
+                {
+                    payment.IbanNavigation = matchedTenant.G3BankAccount.First();
+                    payment.IbanNavigation.Tenant = matchedTenant;
+                    continue;
+                }
                 // secondly try to match name in description or association
                 matchedTenant = TenantList.FirstOrDefault(tenant =>
                     {
@@ -179,12 +190,39 @@ namespace PropertyManagement.Domain.ViewModels
                     }
                 );
 
-                if (matchedTenant == null) break;
+                if (matchedTenant == null) continue;
                 payment.IbanNavigation = matchedTenant.G3BankAccount.First();
                 payment.IbanNavigation.Tenant = matchedTenant;
             }
 
             return paymentList;
+        }
+
+        private List<G3Payments> ApplyStandingOrders(List<G3Payments> paymentList)
+        {
+            var newPaymentList = new List<G3Payments>(paymentList);
+
+            paymentList.ForEach(payment =>
+            {
+                if (payment.Type.ToLower() == "dauerauftrag")
+                {
+                    var remainingMonths = 12 - payment.BookingDate.Month;
+                    for (var i = 1; i <= remainingMonths; i++)
+                    {
+                        var newPayment = new G3Payments(payment);
+                        newPayment.BookingDate = newPayment.BookingDate.AddMonths(i);
+                        newPayment.ValutaDate = newPayment.ValutaDate.AddMonths(i);
+                        newPaymentList.Add(newPayment);
+                    }
+                }
+            });
+
+            newPaymentList.ForEach(payment =>
+            {
+                Debug.WriteLine($"{payment.Description} : {payment.Type} : {payment.ValutaDate}");
+            });
+
+            return newPaymentList;
         }
 
         // ReSharper disable once UnusedParameter.Local

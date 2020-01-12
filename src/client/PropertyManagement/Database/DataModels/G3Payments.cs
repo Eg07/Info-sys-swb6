@@ -17,5 +17,22 @@ namespace PropertyManagement.Database.DataModels
 
         public virtual G3BankAccount IbanNavigation { get; set; }
         public virtual G3Lease Lease { get; set; }
+
+        public G3Payments() { }
+
+        public G3Payments(G3Payments payment)
+        {
+            Id = payment.Id;
+            Description = payment.Description;
+            Association = payment.Association;
+            Type = payment.Type;
+            Amount = payment.Amount;
+            BookingDate = payment.BookingDate;
+            ValutaDate = payment.ValutaDate;
+            LeaseId = payment.LeaseId;
+            Iban = payment.Iban;
+            IbanNavigation = payment.IbanNavigation;
+            Lease = payment.Lease;
+        }
     }
 }
