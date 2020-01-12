@@ -25,15 +25,14 @@
                         </Grid.RowDefinitions>
                         <DataGrid Grid.Row="0" Margin="0 8 0 0" ItemsSource="{Binding OperatingCosts}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False" materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
                             <DataGrid.Columns>
-                                <materialDesign:DataGridTextColumn Binding="{Binding Id}" Header="Id" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding BookingDate}" Header="Booking Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding ValutaDate}" Header="Valuta Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Type}" Header="Type" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Description" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Amount}" Header="Amount" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Iban}" Header="IBAN" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding DistributionKey}" Header="Distribution Key" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding UnitId}" Header="Assigned Unit" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Id}" Header="Id" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding BookingDate}" Header="Booking Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding ValutaDate}" Header="Valuta Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Type}" Header="Type" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Description" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Amount}" Header="Amount" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridComboBoxColumn Header="Distribution Key" IsEditable="True" SelectedValueBinding="{Binding DistributionKeyDisplay}" ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.DistributionKeys}" />
+                                <materialDesign:DataGridComboBoxColumn Header="Assigned Unit" IsEditable="True" SelectedValueBinding="{Binding Tenant}" ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Tenants}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -57,13 +56,13 @@
                         <DataGrid Grid.Row="0" Margin="0 8 0 0" ItemsSource="{Binding Payments}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False" materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
                             <DataGrid.Columns>
                                 <materialDesign:DataGridTextColumn Binding="{Binding Id}" Header="Id" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding BookingDate}" Header="Booking Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding ValutaDate}" Header="Valuta Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Type}" Header="Type" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Description" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Amount}" Header="Amount" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridTextColumn Binding="{Binding Iban}" Header="IBAN" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                                <materialDesign:DataGridComboBoxColumn Header="Assigned Lease" IsEditable="True" SelectedValueBinding="{Binding Unit}" ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Foods}" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding BookingDate}" Header="Booking Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding ValutaDate}" Header="Valuta Date" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Type}" Header="Type" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Description" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Amount}" Header="Amount" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridTextColumn Binding="{Binding Iban}" Header="IBAN" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
+                                <materialDesign:DataGridComboBoxColumn Header="Assigned Lease" IsEditable="True" SelectedValueBinding="{Binding Tenant}" ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Tenants}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
