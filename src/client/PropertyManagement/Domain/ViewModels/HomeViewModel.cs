@@ -70,6 +70,8 @@ namespace PropertyManagement.Domain.ViewModels
             InfoSysDbContext.G3Payments.AddRange(payments);
             InfoSysDbContext.G3OperatingCosts.AddRange(operatingCosts);
             InfoSysDbContext.SaveChanges();
+
+            Snackbar.Enqueue($"Import successful, imported {payments.Count + operatingCosts.Count} transactions");
         }
 
         private List<(DateTime, DateTime, string, string, string, double, string)> GenerateTransactionsFromCsv(string filePath)
