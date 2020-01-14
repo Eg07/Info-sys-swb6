@@ -76,7 +76,7 @@
                                         <materialDesign:DataGridTextColumn Binding="{Binding Description}" Header="Description" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
                                         <materialDesign:DataGridTextColumn Binding="{Binding Amount}" Header="Amount" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
                                         <materialDesign:DataGridTextColumn Binding="{Binding Iban}" Header="IBAN" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" IsReadOnly="True" />
-                                        <materialDesign:DataGridComboBoxColumn Header="Assigned Lease" IsEditable="True" SelectedValueBinding="{Binding Tenant}" ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Tenants}" />
+                                        <materialDesign:DataGridComboBoxColumn Header="Assigned Lease" IsEditable="True" SelectedValueBinding="{Binding Tenant, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSourceBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Tenants}" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>

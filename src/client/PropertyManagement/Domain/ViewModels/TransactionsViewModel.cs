@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +16,8 @@ namespace PropertyManagement.Domain.ViewModels
         public ObservableCollection<PaymentDisplayContainer> Payments { get; set; } = new ObservableCollection<PaymentDisplayContainer>();
         public static IEnumerable<string> Tenants { get; set; } = InfoSysDbContext.G3Tenant.Include(i => i.G3Lease).ThenInclude(i => i.Tenant).Select(tenant => $"{tenant.FirstName} {tenant.LastName}").ToList();
         public static IEnumerable<DistributionKey> DistributionKeys { get; set; }
+
+        public static List<G3Tenant> AllTenants { get; set; } = InfoSysDbContext.G3Tenant.Include(i => i.G3Lease).ThenInclude(i => i.Tenant).ThenInclude(i => i.G3BankAccount).ToList();
 
         public ICommand SaveCommand { get; set; }
 
@@ -41,29 +42,54 @@ namespace PropertyManagement.Domain.ViewModels
         {
             try
             {
-                foreach (var cost in OperatingCosts.ToList())
-                {
-                    if (cost.Tenant == "") continue;
-                    var lease = InfoSysDbContext.G3Tenant.Include(i => i.G3Lease).ToList()
-                        .FirstOrDefault(tenant => $"{tenant.FirstName} {tenant.LastName}" == cost.Tenant)?.G3Lease
-                        .First();
-                    if (lease == null) continue;
-                    var updateItem = InfoSysDbContext.G3OperatingCosts.First(dbCost => dbCost.Id == cost.Id);
-
-                    // update database and display object
-                    cost.UpdateBaseInformation(lease);
-                    updateItem.Unit = lease.Unit;
-                    updateItem.Property = lease.Unit.Property;
-
-                    InfoSysDbContext.G3OperatingCosts.Update(updateItem);
-                    InfoSysDbContext.SaveChanges();
-                }
-
+                UpdateOperatingCosts();
+                UpdatePayments();
                 Snackbar.Enqueue("Update successful");
             }
             catch (Exception)
             {
                 Snackbar.Enqueue("This should not have happened.");
+            }
+        }
+
+        private void UpdateOperatingCosts()
+        {
+            foreach (var cost in OperatingCosts)
+            {
+                var lease = AllTenants.FirstOrDefault(tenant => $"{tenant.FirstName} {tenant.LastName}" == cost.Tenant)?.G3Lease.First();
+                var updateItem = InfoSysDbContext.G3OperatingCosts.First(dbCost => dbCost.Id == cost.Id);
+                if (lease != null)
+                {
+                    
+                    cost.UpdateBaseInformation(lease);
+                    updateItem.Unit = lease.Unit;
+                    updateItem.Property = lease.Unit.Property;
+                }
+                
+                updateItem.DistributionKey = (int) cost.DistributionKeyDisplay;
+                InfoSysDbContext.G3OperatingCosts.Update(updateItem);
+                InfoSysDbContext.SaveChanges();
+            }
+        }
+
+        private void UpdatePayments()
+        {
+            foreach (var payment in Payments)
+            {
+                // skip if conditions apply
+                if (payment.Tenant == "") continue;
+
+                var lease = AllTenants.FirstOrDefault(tenant => $"{tenant.FirstName} {tenant.LastName}" == payment.Tenant)?.G3Lease.First();
+                if (lease == null) continue;
+                var updateItem = InfoSysDbContext.G3Payments.First(dbCost => dbCost.Id == payment.Id);
+
+                // update database and display object
+                payment.UpdateBaseInformation(lease);
+                updateItem.Lease = lease;
+                updateItem.IbanNavigation = lease.Tenant.G3BankAccount.First();
+
+                InfoSysDbContext.Update(updateItem);
+                InfoSysDbContext.SaveChanges();
             }
         }
     }

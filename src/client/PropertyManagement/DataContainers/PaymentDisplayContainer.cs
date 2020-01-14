@@ -1,4 +1,5 @@
-﻿using PropertyManagement.Database.DataModels;
+﻿using System.Linq;
+using PropertyManagement.Database.DataModels;
 
 namespace PropertyManagement.DataContainers
 {
@@ -9,6 +10,12 @@ namespace PropertyManagement.DataContainers
         public PaymentDisplayContainer(G3Payments payment, string tenant) : base(payment)
         {
             Tenant = tenant;
+        }
+
+        public void UpdateBaseInformation(G3Lease lease)
+        {
+            Lease = lease;
+            Iban = lease.Tenant.G3BankAccount.First().Iban;
         }
     }
 }
