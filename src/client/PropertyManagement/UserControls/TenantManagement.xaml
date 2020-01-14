@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Red.Named.Primary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Orange.Named.Primary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -51,14 +51,14 @@
                 </Button.BorderBrush>
                 Update
             </Button>
-            <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Delete this property" Command="{Binding DeleteCommand}">
+            <Button Margin="10 0 0 0" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" ToolTip="Generate Report" Command="{Binding GenerateReportCommand}">
                 <Button.Background>
-                    <SolidColorBrush Color="{StaticResource RedPrimary500}" />
+                    <SolidColorBrush Color="{StaticResource OrangePrimary500}" />
                 </Button.Background>
                 <Button.BorderBrush>
-                    <SolidColorBrush Color="{StaticResource RedPrimary500}" />
+                    <SolidColorBrush Color="{StaticResource OrangePrimary500}" />
                 </Button.BorderBrush>
-                Delete
+                Generate Report
             </Button>
         </StackPanel>
     </Grid>
