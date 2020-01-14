@@ -22,6 +22,7 @@ namespace PropertyManagement.Database
 
         public InfosysContext()
         {
+            DeletePaymentsAndCosts();
         }
 
         public InfosysContext(DbContextOptions<InfosysContext> options)
@@ -446,21 +447,11 @@ namespace PropertyManagement.Database
             SaveChanges();
         }
 
-        /// <summary>
-        /// Remove all addresses from the table
-        /// </summary>
-        public void DeleteSampleAddressDataSet<T>(DbSet<T> set) where T : class
+        private void DeletePaymentsAndCosts()
         {
-            try
-            {
-                set.ToList().ForEach(entry => set.Remove(entry));
-                SaveChanges();
-            }
-            catch (DbUpdateException e)
-            {
-                // TODO: if used by front end print out error message (snackbar)
-                Debug.WriteLine(e);
-            }
+            RemoveRange(G3OperatingCosts);
+            RemoveRange(G3Payments);
+            SaveChanges();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
@@ -31,9 +32,9 @@ namespace PropertyManagement.Domain.ViewModels
         private void ImportTransactions()
         {
             string filePath = null;
-            var openFileDialog = new OpenFileDialog {Filter = "CSV files (*.csv)|*.csv|XLS files (*.xls)|*.xls"};
+            var openFileDialog = new OpenFileDialog { Filter = "CSV files (*.csv)|*.csv|XLS files (*.xls)|*.xls" };
             if (openFileDialog.ShowDialog() == true)
-               filePath = openFileDialog.FileName;
+                filePath = openFileDialog.FileName;
 
             if (filePath == null)
             {
@@ -57,7 +58,7 @@ namespace PropertyManagement.Domain.ViewModels
         private void ImportCsvData(string filePath)
         {
             var transactions = GenerateTransactionsFromCsv(filePath);
-            if(transactions == null) return;
+            if (transactions == null) return;
 
             // prepare payments for insertion
             var payments = ExtractPaymentsFromTransactions(transactions);
@@ -67,11 +68,37 @@ namespace PropertyManagement.Domain.ViewModels
             // prepare operatingCosts for insertion
             var operatingCosts = ExtractOperatingCostsFromTransactions(transactions);
 
-            InfoSysDbContext.G3Payments.AddRange(payments);
-            InfoSysDbContext.G3OperatingCosts.AddRange(operatingCosts);
-            InfoSysDbContext.SaveChanges();
+            // Insert into database
+            var successfulInserts = 0;
+            payments.ForEach(payment =>
+            {
+                try
+                {
+                    InfoSysDbContext.G3Payments.Add(payment);
+                    InfoSysDbContext.SaveChanges();
+                    successfulInserts++;
+                }
+                catch(Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            });
 
-            Snackbar.Enqueue($"Import successful, imported {payments.Count + operatingCosts.Count} transactions");
+            operatingCosts.ForEach(cost =>
+            {
+                try
+                {
+                    InfoSysDbContext.G3OperatingCosts.Add(cost);
+                    InfoSysDbContext.SaveChanges();
+                    successfulInserts++;
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            });
+
+            Snackbar.Enqueue($"Import successful, imported {successfulInserts} transactions, ignored {payments.Count + operatingCosts.Count - successfulInserts} duplicates");
         }
 
         private List<(DateTime, DateTime, string, string, string, double, string)> GenerateTransactionsFromCsv(string filePath)
@@ -161,7 +188,7 @@ namespace PropertyManagement.Domain.ViewModels
                         break;
                     }
 
-                    transaction.DistributionKey = (int) DistributionKey.DistributeByArea;
+                    transaction.DistributionKey = (int)DistributionKey.DistributeByArea;
                 }
             });
 
