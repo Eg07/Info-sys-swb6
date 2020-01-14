@@ -27,13 +27,10 @@ namespace PropertyManagement.DataContainers
             Tenant = tenant;
         }
 
-        public void UpdateBaseInformation(InfosysContext context)
+        public void UpdateBaseInformation(G3Lease lease)
         {
-            var wow = Tenant;
-            var newTenant = context.G3Tenant.Include(i => i.G3Lease).FirstOrDefault(tenant => $"{tenant.FirstName} {tenant.LastName}" == Tenant);
-            var lease = newTenant.G3Lease.First();
-            UnitId = lease.UnitId;
-            PropertyId = lease.Unit.PropertyId;
+            Unit = lease.Unit;
+            Property = lease.Unit.Property;
         }
     }
 }

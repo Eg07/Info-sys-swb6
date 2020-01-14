@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:PropertyManagement.Domain.ViewModels"
         mc:Ignorable="d"
-        Title="Property Management" Height="720" Width="1180"
+        Title="Property Management" Height="864" Width="1416"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:userControls="clr-namespace:PropertyManagement.UserControls"
         xmlns:uiElements="clr-namespace:PropertyManagement.Domain.UiElements"

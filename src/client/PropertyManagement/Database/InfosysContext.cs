@@ -22,7 +22,6 @@ namespace PropertyManagement.Database
 
         public InfosysContext()
         {
-            DeletePaymentsAndCosts();
         }
 
         public InfosysContext(DbContextOptions<InfosysContext> options)

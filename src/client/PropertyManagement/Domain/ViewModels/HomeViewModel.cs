@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
@@ -16,12 +15,7 @@ namespace PropertyManagement.Domain.ViewModels
     public class HomeViewModel : ViewModelBase
     {
         public ICommand ImportTransactionsCommand { get; private set; }
-
         private static readonly List<G3Tenant> TenantList = InfoSysDbContext.G3Tenant.Include(i => i.G3BankAccount).Include(i => i.G3Lease).ToList();
-
-        // TODO: move to transactions
-        private static int _totalResidents = InfoSysDbContext.G3Unit.Sum(unit => unit.ResidentNr);
-        private static double _totalArea = InfoSysDbContext.G3Unit.Sum(unit => unit.Area);
 
         public HomeViewModel()
         {
