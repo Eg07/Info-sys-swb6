@@ -19,6 +19,9 @@
                         <Button ToolTip="Save" Command="{Binding SaveCommand}">
                             <materialDesign:PackIcon Kind="ContentSave" />
                         </Button>
+                        <Button ToolTip="Save" Command="{Binding DeleteTransactionsCommand}">
+                            <materialDesign:PackIcon Kind="DatabaseRemove" />
+                        </Button>
                     </ToolBar>
                 </ToolBarTray>
                 <StackPanel Orientation="Horizontal">
